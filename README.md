@@ -13,3 +13,10 @@ Ajou-TAYO Client
 > Styling (Styled Component, Emotion, etc...) 
 
 ---------------------------------------
+## Install Steps
+> 1. yarn install
+> 2. yarn dev
+
+VS Code 사용 시 추가 설정
+> 1. Go > Go to File.. (⌘ + p) 이동 하여 TypeScript: Select TypeScript Version를 검색
+> 2. Use Workspace Version 을 선택
