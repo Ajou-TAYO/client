@@ -14,9 +14,23 @@ Ajou-TAYO Client
 
 ---------------------------------------
 ## Install Steps
-> 1. yarn install 을 통해 package unplug
-> > VS Code 사용 시 추가 설정
-> > 1. yarn dlx @yarnpkg/sdks vscode
-> > 2. Go > Go to File.. (⌘ + p) 이동 하여 TypeScript: Select TypeScript Version를 검색
-> > 3. Use Workspace Version 을 선택
-> 2. yarn dev 를 통해 실행
+
+의존성 설치
+```shell
+yarn install --immutable
+```
+
+VS Code 사용시 적용
+```shell
+yarn dlx @yarnpkg/sdks vscode
+```
++ 설치 후에 Workspace의 Typescript 버전으로 변경 메시지가 나온다면 Allow
++ 만약 메시지가 안나오거나 Dismiss를 눌렀을 경우 Manual 하게 변경
+> - Command Pallette (cmd+shift+p)
+> - TypeScript: Select TypeScript Version...
+> - Use Workspace Version 선택
+
+실행
+```shell
+yarn dev
+```
