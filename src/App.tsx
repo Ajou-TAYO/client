@@ -3,13 +3,14 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <div>
-
+      <div id="home_main">
+        <div id="announce_banner"></div>
       </div>
+      <div id="tab"></div>
+      <div id="drag"></div>
     </div>
   )
 }

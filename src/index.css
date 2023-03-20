@@ -12,6 +12,32 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  box-sizing: border-box;
+
+  position: relative;
+  width: 375px;
+  height: 812px;
+
+  background: #ECF0F3;
+  border: 2px solid #000000;
+  border-radius: 50px;
+}
+
+home_main{
+  position: absolute;
+  width: 328px;
+  height: 660px;
+  left: 25px;
+  top: 29px;
+}
+
+announce_banner{
+  position: absolute;
+  width: 271px;
+  height: 118px;
+  left: 52px;
+  top: 125px;
 }
 
 a {
