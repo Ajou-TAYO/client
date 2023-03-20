@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import reactLogo from "./assets/react.svg";
+import { Dialog, Transition } from "@headlessui/react";
 
 function App() {
+    const [isOpen, setIsOpen] = useState(true);
+
     return (
         <div className="container h-screen w-screen">
             <Map
@@ -20,11 +22,62 @@ function App() {
             flex flex-row items-center gap-5 
             rounded-2xl bg-white p-5 shadow-2xl"
             >
-                <button className="space-y-2">
+                <button className="space-y-2" onClick={() => setIsOpen(true)}>
                     <span className="block h-1 w-8 bg-gray-600" />
                     <span className="block h-1 w-8 bg-gray-600" />
                     <span className="block h-1 w-8 bg-gray-600" />
                 </button>
+
+                <Transition show={isOpen} as={Fragment}>
+                    <Dialog onClose={() => setIsOpen(false)} className="relative z-50">
+                        {/* The backdrop, rendered as a fixed sibling to the panel container */}
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                        >
+                            <div className="fixed inset-0 bg-black/50" />
+                        </Transition.Child>
+
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 -translate-x-full"
+                            enterTo="opacity-100 translate-x-0"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 translate-x-0"
+                            leaveTo="opacity-0 -translate-x-full"
+                        >
+                            {/* Full-screen container to center the panel */}
+                            <div className="fixed left-0 inset-y-0">
+                                {/* The actual dialog panel  */}
+                                <Dialog.Panel className="mx-auto h-full w-48 rounded bg-white">
+                                    <Dialog.Title>손진혁</Dialog.Title>
+
+                                    <ul className="divide-y">
+                                        <li>
+                                            공지사항
+                                        </li>
+                                        <li>
+                                            공지사항
+                                        </li>
+                                        <li>
+                                            공지사항
+                                        </li>
+                                        <li>
+                                            공지사항
+                                        </li>
+                                    </ul>
+                                    {/* ... */}
+                                </Dialog.Panel>
+                            </div>
+                        </Transition.Child>
+                    </Dialog>
+                </Transition>
             </div>
 
             <div
