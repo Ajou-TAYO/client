@@ -1,12 +1,13 @@
 import { Fragment, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { Dialog, Transition } from "@headlessui/react";
+import BottomSheet from "./components/BottomSheet";
 
 function App() {
     const [isOpen, setIsOpen] = useState(true);
 
     return (
-        <div className="container h-screen w-screen">
+        <div className="h-screen w-screen">
             <Map
                 center={{ lat: 33.5563, lng: 126.79581 }}
                 className="h-screen w-screen"
@@ -53,24 +54,16 @@ function App() {
                             leaveTo="opacity-0 -translate-x-full"
                         >
                             {/* Full-screen container to center the panel */}
-                            <div className="fixed left-0 inset-y-0">
+                            <div className="fixed inset-y-0 left-0">
                                 {/* The actual dialog panel  */}
                                 <Dialog.Panel className="mx-auto h-full w-48 rounded bg-white">
                                     <Dialog.Title>손진혁</Dialog.Title>
 
                                     <ul className="divide-y">
-                                        <li>
-                                            공지사항
-                                        </li>
-                                        <li>
-                                            공지사항
-                                        </li>
-                                        <li>
-                                            공지사항
-                                        </li>
-                                        <li>
-                                            공지사항
-                                        </li>
+                                        <li>공지사항</li>
+                                        <li>공지사항</li>
+                                        <li>공지사항</li>
+                                        <li>공지사항</li>
                                     </ul>
                                     {/* ... */}
                                 </Dialog.Panel>
@@ -80,40 +73,37 @@ function App() {
                 </Transition>
             </div>
 
-            <div
-                className="absolute inset-x-0 bottom-0 z-10 m-5 flex
-            h-80 flex-col gap-5 overflow-y-scroll
-            rounded-2xl bg-gray-200 p-5 shadow-2xl"
-            >
-                {[...new Array(5)].map(_ => (
-                    <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
-                        <header className="mb-4 font-bold">아주대 - 수원역</header>
+            <BottomSheet>
+                <div className="flex flex-col gap-5">
+                    {[...new Array(5)].map(_ => (
+                        <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
+                            <header className="mb-4 font-bold">아주대 - 수원역</header>
 
-                        <ul className="divide-y pl-4">
-                            <li className="flex flex-row items-center justify-between text-sm">
-                                <div className="font-bold">아주대행</div>
+                            <ul className="divide-y pl-4">
+                                <li className="flex flex-row items-center justify-between text-sm">
+                                    <div className="font-bold">아주대행</div>
 
-                                <div className="flex flex-col text-red-500">
-                                    <div>5분 뒤 출발</div>
-                                    <div>7분 뒤 출발</div>
-                                </div>
-                            </li>
+                                    <div className="flex flex-col text-red-500">
+                                        <div>5분 뒤 출발</div>
+                                        <div>7분 뒤 출발</div>
+                                    </div>
+                                </li>
 
-                            <li className="flex flex-row items-center justify-between text-sm">
-                                <div className="font-bold">수원역행</div>
+                                <li className="flex flex-row items-center justify-between text-sm">
+                                    <div className="font-bold">수원역행</div>
 
-                                <div className="flex flex-col text-red-500">
-                                    <div>5분 뒤 출발</div>
-                                    <div>7분 뒤 출발</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                ))}
-                s
-            </div>
+                                    <div className="flex flex-col text-red-500">
+                                        <div>5분 뒤 출발</div>
+                                        <div>7분 뒤 출발</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </BottomSheet>
 
-            <div className="absolute inset-x-0 bottom-0 z-10 m-5 h-20 rounded-2xl bg-white shadow-2xl" />
+            {/* <div className="absolute inset-x-0 bottom-0 z-10 m-5 h-20 rounded-2xl bg-white shadow-2xl" /> */}
         </div>
     );
 }
