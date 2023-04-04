@@ -1,13 +1,41 @@
 import { Fragment, useState } from "react";
 import axios from "axios";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
-import { Dialog, Transition } from "@headlessui/react";
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { Home, Favorite, Settings } from '@material-ui/icons';
+import { useNavigate } from 'react-router-dom';
 import "./App.css";
+import Profile from "./Profile";
 
 function App() {
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const navigate = useNavigate();
 
     return (
-        
+        <div>
+            <div className="upperBar">
+                <div className="logoImage"></div>
+                <div className="logo">Ajou-TAYO</div>
+                <button className="profile" onClick={() => navigate("/Profile")}></button>
+            </div>
+            <div className="notice">
+                
+            </div>
+            <div className="calender">
+
+            </div>
+            <BottomNavigation className="bottomBar" value={value} onChange={handleChange}>
+                <BottomNavigationAction label="Home" icon={<Home />} />
+                <BottomNavigationAction label="Favorites" icon={<Favorite />} />
+                <BottomNavigationAction label="Favorites" icon={<Favorite />} />
+                <BottomNavigationAction label="Favorites" icon={<Favorite />} />
+                <BottomNavigationAction label="Settings" icon={<Settings />} />
+            </BottomNavigation>
+        </div>
     );
 }
 
