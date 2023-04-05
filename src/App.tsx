@@ -1,7 +1,8 @@
-import { Fragment, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { BottomNavigation, BottomNavigationAction, IconButton } from '@material-ui/core';
 import { Home, Favorite, Settings } from '@material-ui/icons';
+import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import "./App.css";
 import Profile from "./Profile";
@@ -9,24 +10,71 @@ import Profile from "./Profile";
 function App() {
     const [value, setValue] = useState(0);
 
+    const [noticeData, setNoticeData] = useState([{
+        "title" : "testTitle1",
+        "body" : "testBody1",
+        "date" : "testDate1"
+    },
+    {
+        "title" : "testTitle2",
+        "body" : "testBody2",
+        "date" : "testDate2"
+    },
+    {
+        "title" : "testTitle2",
+        "body" : "testBody2",
+        "date" : "testDate2"
+    },]);
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     const navigate = useNavigate();
 
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
+
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setQuery(event.target.value);
+    }
+
+    function handleSearch() {
+        SetResults([query]);
+    }
+
     return (
-        <div>
+        <div className="wrapAll">
             <div className="upperBar">
-                <div className="logoImage"></div>
-                <div className="logo">Ajou-TAYO</div>
+                <div className="logoBox">
+                    <div className="logoImage"></div>
+                    <div className="logo">Ajou-life</div>
+                </div>
                 <button className="profile" onClick={() => navigate("/Profile")}></button>
             </div>
-            <div className="notice">
-                
-            </div>
-            <div className="calender">
-
+            <div className="content">
+                <div>
+                    <div className="searchBar">
+                        <input className="searchInput" placeholder="Search" type="search" value={query} onChange={handleInputChange} />
+                        <IconButton className="searchBtn" onClick={handleSearch}>
+                            <SearchIcon className="searchIcon"/>
+                        </IconButton>
+                    </div>
+                    <div className="notice">
+                        <ul>
+                            {noticeData.map((item, index) => (
+                                <li key={index} className="noticeItem">
+                                    <div className="itemTitle">{item.title}</div>
+                                    <div className="itemBody">{item.body}</div>
+                                    <div className="itemDate">{item.date}</div>
+                                </li>
+                            ))}
+                        </ul>                
+                    </div>
+                </div>
+                <div className="calender">
+                    
+                </div>
             </div>
             <BottomNavigation className="bottomBar" value={value} onChange={handleChange}>
                 <BottomNavigationAction label="Home" icon={<Home />} />
