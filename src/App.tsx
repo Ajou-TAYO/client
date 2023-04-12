@@ -4,12 +4,14 @@ import { BottomNavigation, BottomNavigationAction, IconButton } from '@material-
 import { Home, Favorite, Settings } from '@material-ui/icons';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
+import Calendar from "@ericz1803/react-google-calendar";
 import "./App.css";
-import Profile from "./Profile";
+import 'react-calendar/dist/Calendar.css'
 
 function App() {
     const [value, setValue] = useState(0);
 
+    const [dateData, setDateData] = useState(new Date());
     const [noticeData, setNoticeData] = useState([{
         "title" : "testTitle1",
         "body" : "testBody1",
@@ -21,9 +23,9 @@ function App() {
         "date" : "testDate2"
     },
     {
-        "title" : "testTitle2",
-        "body" : "testBody2",
-        "date" : "testDate2"
+        "title" : "testTitle3",
+        "body" : "testBody3",
+        "date" : "testDate3"
     },]);
 
     const handleChange = (event, newValue) => {
@@ -34,6 +36,45 @@ function App() {
 
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
+
+    /* const API_KEY = "YOUR_API_KEY"; */
+    let calendars = [
+    {calendarId: "09opmkrjova8h5k5k46fedmo88@group.calendar.google.com", color: "red"}, //add a color field to specify the color of a calendar
+    {calendarId: "hkr1dj9k6v6pa79gvpv03eapeg@group.calendar.google.com", color: "blue"}, //without a specified color, it defaults to blue (#4786ff)
+    {calendarId: "rg4m0k607609r2jmdr97sjvjus@group.calendar.google.com", color: "rgb(63, 191, 63)"} //accepts hex and rgb strings (doesn't work with color names)
+    ];
+
+    let styles = {
+    //you can use object styles (no import required)
+    calendar: {
+        margin: "0px",
+         //make outer edge of calendar thicker
+    },
+    //you can also use emotion's string styles
+    today: {
+    /* highlight today by making the text red and giving it a red border */
+        color: "red",
+        border: "1px solid red",
+    },
+    day: {
+        height: "80%",
+    },/* 
+    tooltip: {
+        
+    },
+    event: {
+
+    },
+    eventText: {
+
+    },
+    eventCircle: {
+
+    },
+    multiEvent: {
+
+    }, */
+    }
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         setQuery(event.target.value);
@@ -72,8 +113,8 @@ function App() {
                         </ul>                
                     </div>
                 </div>
-                <div className="calender">
-                    
+                <div className="calendar">
+                <Calendar /* apiKey={API_KEY} */ calendars={calendars} styles={styles}/>
                 </div>
             </div>
             <BottomNavigation className="bottomBar" value={value} onChange={handleChange}>
