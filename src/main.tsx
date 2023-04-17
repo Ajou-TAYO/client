@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import BusPage from "./BusPage";
-import LandingPage from "./LandingPage.";
+import BusPage from "./pages/BusPage";
+import LandingPage from "./pages/LandingPage.";
+import BusPage2 from "./pages/BusPage2";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     {
         path: "/bus",
         element: <BusPage />,
+    },
+    {
+        path: "/bus2",
+        element: <BusPage2 />,
     },
 ]);
 
