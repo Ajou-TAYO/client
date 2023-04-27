@@ -7,7 +7,11 @@ module.exports = {
   theme: {
     extend: {},
   },
+  daisyui: {
+    themes: false,
+  },
   plugins: [
-    require('@headlessui/tailwindcss')
+    require('@headlessui/tailwindcss'),
+    require("daisyui")
   ],
 }
