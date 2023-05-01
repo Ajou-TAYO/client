@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import BottomNav from "../components/BottomNav";
 
 export default function LandingPage() {
     return (
@@ -63,6 +64,7 @@ export default function LandingPage() {
                     </div>
                 </div>
             </div>
+            <BottomNav />
         </>
     );
 }
