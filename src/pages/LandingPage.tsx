@@ -1,37 +1,32 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function LandingPage() {
+    const [noticeData, setNoticeData] = useState([
+        {
+            title: "testTitle1",
+            body: "testBody1",
+            date: "testDate1",
+        },
+        {
+            title: "testTitle2",
+            body: "testBody2",
+            date: "testDate2",
+        },
+        {
+            title: "testTitle3",
+            body: "testBody3",
+            date: "testDate3",
+        },
+    ]);
+
     return (
-        <div className="h-screen w-screen flex flex-col">
+        <div className="flex h-screen w-screen flex-col">
             {/* Navbar */}
             <nav className="inset-x-0 top-0 p-2">
                 <div className="navbar bg-base-100 rounded-box shadow-xl">
-                    <div className="flex-none">
-                        <button className="btn btn-square btn-ghost">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                className="inline-block h-5 w-5 stroke-current"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            </svg>
-                        </button>
-                    </div>
                     <div className="flex-1">
                         <a className="text-xl font-bold normal-case">Ajou Life</a>
-                    </div>
-                    <div className="flex-none gap-2">
-                        <button className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="https://www.w3schools.com/howto/img_avatar.png" />
-                            </div>
-                        </button>
                     </div>
                 </div>
             </nav>
@@ -39,6 +34,17 @@ export default function LandingPage() {
             {/* Content */}
             <div className="flex-1 overflow-scroll p-2">
                 <div className="space-y-4">
+                    <div className="notice">
+                        <ul>
+                            {noticeData.map((item, index) => (
+                                <li key={index} className="noticeItem">
+                                    <div className="itemTitle">{item.title}</div>
+                                    <div className="itemBody">{item.body}</div>
+                                    <div className="itemDate">{item.date}</div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                     <div className="card bg-primary text-primary-content flex h-48 items-center justify-center text-2xl font-bold">
                         <div>환 영 합 니 다</div>
                         <div>아 주 라 이 프</div>
@@ -142,20 +148,9 @@ export default function LandingPage() {
                     </svg>
                 </button>
                 <button className="text-primary">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                        />
-                    </svg>
+                    <div className="w-10 rounded-full">
+                        <img src="https://www.w3schools.com/howto/img_avatar.png" />
+                    </div>
                 </button>
             </div>
         </div>
