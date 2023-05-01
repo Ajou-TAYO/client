@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Map, Polyline, CustomOverlayMap } from "react-kakao-maps-sdk";
 import { svgPathProperties as SvgPathProperties } from "svg-path-properties";
 
