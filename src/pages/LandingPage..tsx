@@ -45,7 +45,7 @@ export default function LandingPage() {
                         <div className="text-xs font-bold text-gray-200">편의시설</div>
                     </div>
                 </div>
-                haksa 1 jung
+                학사일정
                 <div>
                     <div className="relative grid h-96 grid-cols-7 grid-rows-5 gap-px border border-gray-200 bg-gray-200">
                         {[...new Array(35)].map((_, i) => (

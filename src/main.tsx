@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BusPage from "./pages/BusPage";
 import LandingPage from "./pages/LandingPage.";
 import BusPage2 from "./pages/BusPage2";
+import AlianceMap from "./pages/AlianceMap";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     {
         path: "/bus2",
         element: <BusPage2 />,
+    },
+    {
+        path: "/aliance",
+        element: <AlianceMap />,
     },
 ]);
 
