@@ -3,10 +3,96 @@ import axios from "axios";
 import "./SignUp.css";
 
 function SignUp() {
-
-    const [id, setId] = useState("")
+    const [email, setEmail] = useState("");
+    const [verificationCode, setVerificationCode] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [isSent, setIsSent] = useState(false);
+  
+    const handleSendVerificationCode = () => {
+        axios.post('http://localhost:8080/signup/email', {
+            email: id
+        })
+        .then(response => {
+            return axios.post('http://localhost:8080/signup/email/request', {
+                email: id
+              })
+            .then(response => {
+              console.log(response.data);
+              // 이메일 인증 성공 처리
+            })
+            .catch(error => {
+              console.error(error);
+              // 이메일 인증 실패 처리
+            });
+        })
+        .catch(error => {
+          console.error(error);
+          // 이메일 인증 실패 처리
+        });
+        setIsSent(true);
+    };
+  
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(email, verificationCode, password, confirmPassword);
+    };
+  
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>
+            Email:
+            <input
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+            />
+            </label>
+            <br />
+            {!isSent && (
+            <button type="button" onClick={handleSendVerificationCode}>
+                Send Verification Code
+            </button>
+            )}
+            {isSent && (
+            <>
+                <label>
+                Verification Code:
+                <input
+                    type="text"
+                    value={verificationCode}
+                    onChange={(event) => setVerificationCode(event.target.value)}
+                />
+                </label>
+                <br />
+            </>
+            )}
+            <label>
+                Password:
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                />
+            </label>
+            <br />
+            <label>
+                Confirm Password:
+                <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                />
+            </label>
+            <br />
+            <button type="submit">Signup</button>
+        </form>
+    );
+  }
+/*  const [id, setId] = useState("")
     const [num, setVerifyNum] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordCheck, setPwck] = useState("")
     
     function postSignUpData() {
         console.log(id, num, password);
@@ -52,6 +138,21 @@ function SignUp() {
         e.preventDefault();
     }
 
+    function passwordCheckFunc() {
+        var password = document.getElementById("pw").value;
+        var passwordCheck = document.getElementById("pwck").value;
+
+        if(passwordCheck=="") {
+            document.getElementById("passwordCheckText").innerHTML=""
+        }
+        else if (password!=passwordCheck) {
+            document.getElementById("passwordCheckText").innerHTML="비밀번호가 일치하지 않습니다."
+        }
+        else {
+            document.getElementById("passwordCheckText").innerHTML="비밀번호가 일치합니다."
+        }
+    }
+
     return (
         <div className="wrap">
             <h1 className="signUpText">Sign Up</h1>
@@ -78,10 +179,16 @@ function SignUp() {
                         <input type="password" placeholder="Password" className="signUp"  onChange={(event) => setPassword(event.target.value)}/>
                     </div>
                 </div>
+                <div className="smBox">
+                    <p className="text">비밀번호 확인</p>
+                    <div className="signUpBorder">
+                        <input type="password" placeholder="Password" className="signUp"  onChange={(event) => setPwck(event.target.value)} onkeyup={passwordCheckFunc}/>
+                    </div>
+                </div>
                 <button className="signUpButton" onClick={postSignUpData}>Log In</button>
             </form>
         </div>
     )
-}
+} */
 
 export default SignUp;
