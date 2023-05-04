@@ -4,8 +4,21 @@ import "react-spring-bottom-sheet/dist/style.css";
 import { useState } from "react";
 import BottomNav from "../components/BottomNav";
 
-export default function AlianceMap() {
+export default function AllianceMap() {
     const [Open, setOpen] = useState(new Array(2).fill(false));
+
+    const test_data = [
+        {
+            ally_name: "굿커피",
+            partnership_detail: "학생증 제시시 10% 할인",
+            review: "픽업이 빨라요",
+        },
+        {
+            ally_name: "겐코",
+            partnership_detail: "학생증 제시시 콜라 서비스",
+            review: "맛있어요",
+        },
+    ];
 
     function onDismiss(markerindex) {
         const newBottomSheetStates = [...Open];
@@ -98,7 +111,9 @@ export default function AlianceMap() {
             </Map>
             {mapMarkers.map((marker, index) => (
                 <BottomSheet key={index} open={Open[index]} onDismiss={() => onDismiss(index)}>
-                    <p>test{index}</p>
+                    <p>{test_data[index].ally_name}</p>
+                    <p>{test_data[index].partnership_detail}</p>
+                    <p>{test_data[index].review}</p>
                 </BottomSheet>
             ))}
             <BottomNav />

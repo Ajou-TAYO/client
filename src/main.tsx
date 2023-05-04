@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BusPage from "./pages/BusPage";
 import LandingPage from "./pages/LandingPage.";
 import BusPage2 from "./pages/BusPage2";
-import AlianceMap from "./pages/AlianceMap";
+import AllianceMap from "./pages/AllianceMap";
 
 const router = createBrowserRouter([
     {
@@ -21,8 +21,8 @@ const router = createBrowserRouter([
         element: <BusPage2 />,
     },
     {
-        path: "/aliance",
-        element: <AlianceMap />,
+        path: "/alliance",
+        element: <AllianceMap />,
     },
 ]);
 
