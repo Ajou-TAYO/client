@@ -25,8 +25,12 @@ export default function LandingPage() {
             {/* Navbar */}
             <nav className="inset-x-0 top-0 p-2">
                 <div className="navbar bg-base-100 rounded-box shadow-xl">
-                    <div className="flex-1">
-                        <a className="text-xl font-bold normal-case">Ajou Life</a>
+                    <div className="flex-1 justify-between">
+                        <a className="px-3 text-xl font-bold normal-case">Ajou Life</a>
+                        <div>
+                        <Link className="px-1 object-right text-blue-400 text-sm font-bold" to="/Login">로그인</Link>
+                        <Link className="px-1 object-right text-blue-400 text-sm font-bold" to="/Signup">회원가입</Link>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -44,10 +48,6 @@ export default function LandingPage() {
                                 </li>
                             ))}
                         </ul>
-                    </div>
-                    <div className="card bg-primary text-primary-content flex h-48 items-center justify-center text-2xl font-bold">
-                        <div>환 영 합 니 다</div>
-                        <div>아 주 라 이 프</div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <Link
