@@ -28,8 +28,8 @@ export default function LandingPage() {
                     <div className="flex-1 justify-between">
                         <a className="px-3 text-xl font-bold normal-case">Ajou Life</a>
                         <div>
-                        <Link className="px-1 object-right text-blue-400 text-sm font-bold" to="/Login">로그인</Link>
-                        <Link className="px-1 object-right text-blue-400 text-sm font-bold" to="/Signup">회원가입</Link>
+                        <Link className="px-1 object-right text-blue-400 text-sm font-bold" to="/login">로그인</Link>
+                        <Link className="px-1 object-right text-blue-400 text-sm font-bold" to="/signup">회원가입</Link>
                         </div>
                     </div>
                 </div>
