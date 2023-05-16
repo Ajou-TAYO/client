@@ -1,5 +1,5 @@
 // SignUp.tsx
-
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -23,17 +23,17 @@ function SignUp() {
             )
             .then(response => {
                 console.log(response.data);
-                // 로그인 성공 처리
+                // 회원가입 성공 처리
             })
             .catch(error => {
                 alert("가입에 실패했습니다. 입력한 내용을 다시 확인해 주세요.");
                 console.error(error);
-                // 로그인 실패 처리
+                // 회원가입 실패 처리
             });
     }
 
     function postEmailCert() {
-        axios
+        return axios
             .post(
                 "http://localhost:8080/members/signup/email",
                 {
@@ -47,15 +47,18 @@ function SignUp() {
                         email: id,
                     })
                     .then(response => {
+                        alert("입력하신 이메일로 인증번호가 전송되었습니다.")
                         console.log(response.data);
                         // 이메일 인증 성공 처리
                     })
                     .catch(error => {
+                        alert("인증코드 전송에 실패하였습니다.");
                         console.error(error);
                         // 이메일 인증 실패 처리
                     });
-            })
+                })
             .catch(error => {
+                alert("이미 가입된 이메일입니다.");
                 console.error(error);
                 console.log("123");
                 // 이메일 인증 실패 처리
@@ -70,7 +73,7 @@ function SignUp() {
         <div>
             <div className="relative">
                 <div>
-                    <div className="my-36 w-auto px-5">
+                    <div className="my-20 w-auto px-5">
                         <p className="pb-4 text-center text-xl font-bold text-blue-900">회원가입</p>
                         <div className="mb-10">
                             <form onSubmit={SignFunc}>
@@ -160,15 +163,18 @@ function SignUp() {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="mb-5 align-top">
-                                    <button
-                                        type="submit"
-                                        onClick={postSignUpData}
-                                        className="my-5 h-9 w-full rounded-sm bg-blue-500 text-sm font-bold text-white"
-                                    >
-                                        가입
-                                    </button>
-                                </div>
+                                <Link
+                                    to="/login">
+                                    <div className="mb-5 align-top">
+                                        <button
+                                            type="submit"
+                                            onClick={postSignUpData}
+                                            className="my-5 h-9 w-full rounded-sm bg-blue-500 text-sm font-bold text-white"
+                                        >
+                                            가입
+                                        </button>
+                                    </div>
+                                </Link>
                             </form>
                         </div>
                     </div>

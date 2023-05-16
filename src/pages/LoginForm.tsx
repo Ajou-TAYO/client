@@ -1,7 +1,9 @@
-// LoginForm.tsx
+//LoginForm.tsx
 
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import SignUp from "./pages/SignUp";
 
 function LoginForm() {
     const [id, setId] = useState("");
@@ -20,6 +22,8 @@ function LoginForm() {
             )
             .then(response => {
                 console.log(response.data);
+                window.location.href = "/";
+                setIsLog(true);
                 // 로그인 성공 처리
             })
             .catch(error => {
@@ -29,7 +33,7 @@ function LoginForm() {
             });
     }
 
-    const LoginFunc = e => {
+    const LoginFunc = (e) => {
         e.preventDefault();
     };
 
@@ -51,7 +55,6 @@ function LoginForm() {
                                                 type="text"
                                                 onChange={event => setId(event.target.value)}
                                                 className="text-m relative inline-flex w-full p-2"
-                                                placeholder="ajoulife@ajou.ac.kr"
                                             />
                                         </div>
                                     </div>
@@ -70,15 +73,38 @@ function LoginForm() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="mb-5 align-top">
+                                <div className="mb-3 align-top">
                                     <button
                                         type="submit"
                                         onClick={postLoginData}
-                                        className="my-5 h-9 w-full rounded-sm bg-blue-500 text-sm font-bold text-white"
+                                        className="mt-5 h-9 w-full rounded-sm bg-blue-500 text-sm font-bold text-white"
                                     >
                                         로그인
                                     </button>
                                 </div>
+                                <div className="w-full flex justify-between">
+                                    <div className="w-5"/>
+                                    <Link to="/signup">
+                                        <div className="">
+                                            <button
+                                                className="h-7 rounded-sm text-xs font-bold text-blue-500 underline"
+                                            >
+                                                회원가입 하기
+                                            </button>
+                                        </div>
+                                    </Link>
+                                    <Link to="/password/find">
+                                        <div className="mb-5">
+                                            <button
+                                                className="h-7 selection:rounded-sm text-xs font-bold text-blue-500 underline"
+                                            >
+                                                비밀번호 찾기
+                                            </button>
+                                        </div>
+                                    </Link>
+                                    <div className="w-5"/>
+                                </div>
+                                
                             </form>
                         </div>
                     </div>

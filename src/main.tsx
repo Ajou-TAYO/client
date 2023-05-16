@@ -6,7 +6,9 @@ import BusPage from "./pages/BusPage";
 import LandingPage from "./pages/LandingPage";
 import BusPage2 from "./pages/BusPage2";
 import LoginForm from "./pages/LoginForm";
+import PreSignUp from "./pages/PreSignUp";
 import SignUp from "./pages/SignUp";
+import FindPw from "./pages/FindPw";
 
 const router = createBrowserRouter([
     {
@@ -26,9 +28,17 @@ const router = createBrowserRouter([
         element: <LoginForm />,
     },
     {
+        path: "/presignup",
+        element: <PreSignUp />,
+    },
+    {
         path: "/signup",
         element: <SignUp />,
-    }
+    },
+    {
+        path: "/password/find",
+        element: <FindPw />,
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
