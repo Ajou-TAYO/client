@@ -3,8 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BusPage from "./pages/BusPage";
-import LandingPage from "./pages/LandingPage.";
+import LandingPage from "./pages/LandingPage";
 import BusPage2 from "./pages/BusPage2";
+import LoginForm from "./pages/LoginForm";
+import PreSignUp from "./pages/PreSignUp";
+import SignUp from "./pages/SignUp";
+import FindPw from "./pages/FindPw";
 import AllianceMap from "./pages/AllianceMap";
 
 const router = createBrowserRouter([
@@ -19,6 +23,22 @@ const router = createBrowserRouter([
     {
         path: "/bus2",
         element: <BusPage2 />,
+    },
+    {
+        path: "/login",
+        element: <LoginForm />,
+    },
+    {
+        path: "/presignup",
+        element: <PreSignUp />,
+    },
+    {
+        path: "/signup",
+        element: <SignUp />,
+    },
+    {
+        path: "/password/find",
+        element: <FindPw />,
     },
     {
         path: "/alliance",
