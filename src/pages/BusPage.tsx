@@ -11,7 +11,7 @@ function BusPage() {
     // Function to fetch the board content
     const getBoard = async () => {
       try {
-        const response = await axios.get("http://-:8080/bus/boards", {});
+        const response = await axios.get("http://localhost:8080/bus/boards", {});
         const content = response.data.data[0].content;
         setBoardContent(content); // Update the state with the fetched content
       } catch (error) {
