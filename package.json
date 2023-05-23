@@ -11,12 +11,20 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@headlessui/tailwindcss": "^0.1.2",
+    "@stomp/stompjs": "^7.0.0",
+    "@types/sockjs": "^0.3.33",
+    "@types/sockjs-client": "^1.5.1",
+    "@types/stompjs": "^2.3.5",
+    "axios": "^1.4.0",
     "daisyui": "^2.51.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-kakao-maps-sdk": "^1.1.6",
     "react-router-dom": "^6.10.0",
     "react-spring-bottom-sheet": "^3.5.0-alpha.0",
+    "sockjs": "^0.3.24",
+    "sockjs-client": "^1.6.1",
+    "stomp": "^0.1.1",
     "svg-path-properties": "^1.1.0"
   },
   "devDependencies": {

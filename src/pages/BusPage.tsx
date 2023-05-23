@@ -1,9 +1,28 @@
 import { BottomSheet } from "react-spring-bottom-sheet";
+import { useEffect, useState } from "react";
 import "react-spring-bottom-sheet/dist/style.css";
 import BusMap from "./BusMap";
 import BottomNav from "../components/BottomNav";
+import axios from "axios";
 
 function BusPage() {
+  const [boardContent, setBoardContent] = useState("");
+  useEffect(() => {
+    // Function to fetch the board content
+    const getBoard = async () => {
+      try {
+        const response = await axios.get("http://-:8080/bus/boards", {});
+        const content = response.data.data[0].content;
+        setBoardContent(content); // Update the state with the fetched content
+      } catch (error) {
+        console.error(error);
+        setBoardContent(""); // Set an empty string if there's an error
+      }
+    };
+
+    getBoard(); // Call the function to fetch the board content
+  }, []);
+
     return (
         <div className="h-screen w-screen">
             <BusMap />
@@ -38,7 +57,7 @@ function BusPage() {
                 <div className="badge badge-error gap-2">
                     <span className="text-xs">
                         <span className="font-bold mr-2">[공지]</span>
-                        8시 20분 아주대행 버스 기상 악화로 인해 10분 지연
+                      {boardContent}
                     </span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
