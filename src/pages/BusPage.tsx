@@ -69,8 +69,8 @@ function BusPage() {
                     </svg>
                 </div>
             </div>
-
-            <BottomSheet
+            
+            {/* <BottomSheet
                 className="bg-base-100"
                 open
                 blocking={false}
@@ -105,7 +105,7 @@ function BusPage() {
                         </div>
                     ))}
                 </div>
-            </BottomSheet>
+            </BottomSheet> */}
             <BottomNav />
         </div>
     );

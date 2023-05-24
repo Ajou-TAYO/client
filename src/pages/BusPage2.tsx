@@ -1,6 +1,7 @@
 import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
 import BusMap from "./BusMap";
+import BottomNav from "../components/BottomNav.tsx"
 
 function BusPage2() {
     return (
@@ -100,6 +101,7 @@ function BusPage2() {
                     </div>
                 </div>
             </div>
+            <BottomNav />
         </div>
     );
 }

@@ -10,6 +10,7 @@ import PreSignUp from "./pages/PreSignUp";
 import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPw";
 import AllianceMap from "./pages/AllianceMap";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         path: "/alliance",
         element: <AllianceMap />,
     },
+    {
+        path: "/profile",
+        element: <Profile />,
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
