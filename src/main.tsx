@@ -9,6 +9,7 @@ import LoginForm from "./pages/LoginForm";
 import PreSignUp from "./pages/PreSignUp";
 import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPw";
+import AllianceMap from "./pages/AllianceMap";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
     {
         path: "/password/find",
         element: <FindPw />,
+    },
+    {
+        path: "/alliance",
+        element: <AllianceMap />,
     },
 ]);
 
