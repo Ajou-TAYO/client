@@ -84,7 +84,7 @@ function LoginForm() {
                                 </div>
                                 <div className="w-full flex justify-between">
                                     <div className="w-5"/>
-                                    <Link to="/signup">
+                                    <Link to="/presignup">
                                         <div className="">
                                             <button
                                                 className="h-7 rounded-sm text-xs font-bold text-blue-500 underline"

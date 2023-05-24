@@ -2,25 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function LandingPage() {
-    const [isHoveredLogin, setIsHoveredLogin] = useState(false);
-    const [isHoveredSignUp, setIsHoveredSignUp] = useState(false);
-
-    const handleMouseEnter = () => {
-        setIsHoveredLogin(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHoveredLogin(false);
-    };
-
-    const mouseOnSignUp = () => {
-        setIsHoveredSignUp(true);
-    };
-
-    const mouseOutSignUp = () => {
-        setIsHoveredSignUp(false);
-    };
-
+    
     const [noticeData, setNoticeData] = useState([
         {
             title: "testTitle1",
@@ -47,8 +29,8 @@ export default function LandingPage() {
                     <div className="flex-1 justify-between">
                         <a className="px-3 text-xl font-bold normal-case">Ajou Life</a>
                         <div>
-                        <Link className={isHoveredLogin ? "px-1 object-right text-blue-400 text-sm font-bold" : "px-1 object-right text-gray-400 text-sm font-bold"} to="/login" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>로그인</Link>
-                        <Link className={isHoveredSignUp ? "px-1 object-right text-blue-400 text-sm font-bold" : "px-1 object-right text-gray-400 text-sm font-bold"} to="/presignup" onMouseEnter={mouseOnSignUp} onMouseLeave={mouseOutSignUp}>회원가입</Link>
+                        <Link className="px-1 object-right text-gray-400 hover:text-blue-400 text-sm font-bold" to="/login">로그인</Link>
+                        <Link className="px-1 object-right text-gray-400 hover:text-blue-400 text-sm font-bold" to="/presignup">회원가입</Link>
                         </div>
                     </div>
                 </div>
