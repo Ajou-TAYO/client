@@ -7,6 +7,14 @@ import BottomNav from "../components/BottomNav";
 export default function AllianceMap() {
     const [Open, setOpen] = useState(new Array(2).fill(false));
     const [Show, setShow] = useState(new Array(4).fill(true));
+    const [isClicked1, setIsClicked1] = useState(false);
+    const [isClicked2, setIsClicked2] = useState(false);
+    const [isClicked3, setIsClicked3] = useState(false);
+    const [isClicked4, setIsClicked4] = useState(false);
+    const [clickCount1, setClickCount1] = useState(1);
+    const [clickCount2, setClickCount2] = useState(1);
+    const [clickCount3, setClickCount3] = useState(1);
+    const [clickCount4, setClickCount4] = useState(1);
 
     const test_data = [
         {
@@ -63,6 +71,47 @@ export default function AllianceMap() {
         },
     ];
 
+    const handleToggle1 = (event) => {
+        setClickCount1(clickCount1 + 1);
+        console.log(clickCount1);
+        if (clickCount1 % 2 === 0) {
+            setIsClicked1(false);
+        }
+        else {
+            setIsClicked1(true);
+        }
+    };
+
+    const handleToggle2 = (event) => {
+        setClickCount2(clickCount2 + 1);
+        if (clickCount2 % 2 === 0) {
+            setIsClicked2(false);
+        }
+        else {
+            setIsClicked2(true);
+        }
+    };
+
+    const handleToggle3 = (event) => {
+        setClickCount3(clickCount3 + 1);
+        if (clickCount3 % 2 === 0) {
+            setIsClicked3(false);
+        }
+        else {
+            setIsClicked3(true);
+        }
+    };
+
+    const handleToggle4 = (event) => {
+        setClickCount4(clickCount4 + 1);
+        if (clickCount4 % 2 === 0) {
+            setIsClicked4(false);
+        }
+        else {
+            setIsClicked4(true);
+        }
+    };
+
     return (
         <div className="h-screen w-screen">
             <div className="absolute inset-x-0 top-0 z-10 p-2">
@@ -91,79 +140,22 @@ export default function AllianceMap() {
                 </div>
             </div>
 
-            <div
-                style={{
-                    display: "flex",
-                    position: "fixed",
-                    top: "10vh",
-                    left: "2vw",
-                    zIndex: 2,
-                    backgroundColor: "white",
-                    border: "2px solid orange",
-                    alignItems: "center",
-                    flexDirection: "column",
-                    width: "auto",
-                }}
-            >
-                <button
-                    style={{
-                        width: "50%",
-                        display: "flex",
-                        alignItems: "center",
-                        alignSelf: "flex-start",
-                        padding: 0,
-                    }}
-                >
-                    <img
-                        style={{ objectFit: "contain", width: "20%", float: "left" }}
-                        src="/public/yellow_button.png"
-                    />
-                    <span style={{ float: "left", flexGrow: 1, textAlign: "left", fontSize: "20px" }}>카페&디저트</span>
+            <div className="flex fixed flex-col top-24 left-5 box-border border-2 border-indigo-400">
+                <button className="flex flex-row p-1" onClick={handleToggle1}>
+                    <div className = "mt-1 mx-2 w-4 h-4 bg-red-500 rounded-full"></div>
+                    <p className={`mr-2 ${!isClicked1 ? 'font-bold' : ''}`}>카페 & 디저트</p>
                 </button>
-                <button
-                    style={{
-                        width: "50%",
-                        display: "flex",
-                        alignSelf: "flex-start",
-                        alignItems: "center",
-                        padding: 0,
-                    }}
-                >
-                    <img
-                        style={{ objectFit: "contain", width: "20%", float: "left" }}
-                        src="/public/yellow_button.png"
-                    />
-                    <span style={{ float: "left", flexGrow: 1, textAlign: "left", fontSize: "20px" }}>식당</span>
+                <button className="flex flex-row p-1" onClick={handleToggle2}>
+                    <div className = "mt-1 mx-2 w-4 h-4 bg-blue-500 rounded-full"></div>
+                    <p className={`mr-2 ${!isClicked2 ? 'font-bold' : ''}`}>식당</p>
                 </button>
-                <button
-                    style={{
-                        width: "50%",
-                        display: "flex",
-                        alignSelf: "flex-start",
-                        alignItems: "center",
-                        padding: 0,
-                    }}
-                >
-                    <img
-                        style={{ objectFit: "contain", width: "20%", float: "left" }}
-                        src="/public/yellow_button.png"
-                    />
-                    <span style={{ float: "left", flexGrow: 1, textAlign: "left", fontSize: "20px" }}>편의시설</span>
+                <button className="flex flex-row p-1" onClick={handleToggle3}>
+                    <div className = "mt-1 mx-2 w-4 h-4 bg-yellow-500 rounded-full"></div>
+                    <p className={`mr-2 ${!isClicked3 ? 'font-bold' : ''}`}>편의시설</p>
                 </button>
-                <button
-                    style={{
-                        width: "50%",
-                        display: "flex",
-                        alignSelf: "flex-start",
-                        alignItems: "center",
-                        padding: 0,
-                    }}
-                >
-                    <img
-                        style={{ objectFit: "contain", width: "20%", float: "left" }}
-                        src="/public/yellow_button.png"
-                    />
-                    <span style={{ float: "left", flexGrow: 1, textAlign: "left", fontSize: "20px" }}>주점</span>
+                <button className="flex flex-row p-1" onClick={handleToggle4}>
+                    <div className = "mt-1 mx-2 w-4 h-4 bg-green-500 rounded-full"></div>
+                    <p className={`mr-2 ${!isClicked4 ? 'font-bold' : ''}`}>주점</p>
                 </button>
             </div>
 
