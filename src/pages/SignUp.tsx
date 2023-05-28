@@ -1,6 +1,6 @@
 // SignUp.tsx
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, setState } from "react";
 import axios from "axios";
 
 function SignUp() {
@@ -8,6 +8,8 @@ function SignUp() {
     const [num, setVerifyNum] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPwck] = useState("");
+    const [isEqual, setIsEqual] = useState(false);
+    const [isValid, setIsValid] = useState(false);
 
     function postSignUpData() {
         console.log(id, num, password);
@@ -23,6 +25,7 @@ function SignUp() {
             )
             .then(response => {
                 console.log(response.data);
+                window.location.href = "/login";
                 // 회원가입 성공 처리
             })
             .catch(error => {
@@ -68,6 +71,44 @@ function SignUp() {
     const SignFunc = (e: { preventDefault: () => void }) => {
         e.preventDefault();
     };
+    
+    const validatePassword = (password) => {
+        console.log("test : ", password);
+        if (password.length <= 8) {
+          setIsValid(false);
+        }
+        else if (!/[a-zA-Z]/.test(password)) {
+            setIsValid(false);
+        }
+        else if (!/\d/.test(password)) {
+            setIsValid(false);
+        }
+        else {
+            setIsValid(true);
+        }
+      }
+
+      const passwordChange = (event) => {
+        const pwvalue = event.target.value;
+        setPassword(pwvalue);
+        console.log("password : ", pwvalue);
+        validatePassword(pwvalue);
+      };
+
+      const checkPassword = (passwordCheck) => {
+        console.log("check : ", passwordCheck);
+        console.log("check2 : ", password);
+        if(passwordCheck.length == 0) {
+            console.log("false");
+            setIsEqual(false);
+        }
+        else if (password != passwordCheck) {
+            setIsEqual(false);
+        }
+        else {
+            setIsEqual(true);
+        }
+      };
 
     return (
         <div>
@@ -133,15 +174,22 @@ function SignUp() {
                                         <div className="container relative rounded-sm border border-gray-300">
                                             <input
                                                 type="password"
-                                                onChange={event => setPassword(event.target.value)}
+                                                value={password}
+                                                onChange={passwordChange}
                                                 className="text-m relative inline-flex w-full p-1"
                                             />
                                         </div>
                                     </div>
                                     <div className="relative mt-2 flex items-center">
-                                        <span className="text-xs text-gray-400">
+                                        {!isValid ? 
+                                            <span className="text-xs text-gray-400">
                                             8자 이상의 영문 숫자 혼합의 비밀번호를 설정해 주세요.
-                                        </span>
+                                            </span>
+                                            : <span className="text-xs text-green-400">
+                                            올바른 형식의 비밀번호입니다!
+                                            </span>
+                                        }
+                                        
                                     </div>
                                 </div>
                                 <div className="mb-5">
@@ -152,19 +200,22 @@ function SignUp() {
                                         <div className="container relative rounded-sm border border-gray-300">
                                             <input
                                                 type="password"
-                                                onChange={event => setPwck(event.target.value)}
+                                                onChange={(event) => checkPassword(event.target.value)}
                                                 className="text-m relative inline-flex w-full p-1"
                                             />
                                         </div>
                                     </div>
                                     <div className="relative mt-2 flex items-center">
-                                        <span className="text-xs text-gray-400">
+                                        {!isEqual ? 
+                                            <span className="text-xs text-gray-400">
                                             비밀번호를 한 번 더 입력해 주세요.
-                                        </span>
+                                            </span>
+                                            : <span className="text-xs text-green-400">
+                                            비밀번호와 일치합니다!
+                                            </span>
+                                        }
                                     </div>
                                 </div>
-                                <Link
-                                    to="/login">
                                     <div className="mb-5 align-top">
                                         <button
                                             type="submit"
@@ -174,7 +225,6 @@ function SignUp() {
                                             가입
                                         </button>
                                     </div>
-                                </Link>
                             </form>
                         </div>
                     </div>
