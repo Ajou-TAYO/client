@@ -100,7 +100,7 @@ export default function AllianceMap() {
         return 2;
     }
 
-    const marker_img = ["/red_dot.png", "/blue_dot.png", "/yellow_dot.png", "/green_dot.png"];
+    const markerImg = ["/red_dot.png", "/blue_dot.png", "/yellow_dot.png", "/green_dot.png"];
 
     return (
         <div className="h-screen w-screen">
@@ -170,7 +170,7 @@ export default function AllianceMap() {
                                     setFilOn(false);
                                 }}
                                 image={{
-                                    src: marker_img[check_filter_type(content.category)],
+                                    src: markerImg[check_filter_type(content.category)],
                                     size: {
                                         width: 20,
                                         height: 20,
