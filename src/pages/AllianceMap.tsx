@@ -1,4 +1,4 @@
-import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
 import { useEffect, useMemo, useState } from "react";
@@ -15,22 +15,18 @@ const categoryType = {
     CAFE: {
         title: "카페 / 디저트",
         className: "bg-red-500",
-        markerImageUrl: "/red_dot.png",
     },
     RESTAURANT: {
         title: "식당",
         className: "bg-blue-500",
-        markerImageUrl: "/blue_dot.png",
     },
     PUB: {
         title: "주점",
         className: "bg-green-500",
-        markerImageUrl: "/green_dot.png",
     },
     ETC: {
         title: "기타",
         className: "bg-yellow-500",
-        markerImageUrl: "/yellow_dot.png",
     },
 };
 
@@ -127,30 +123,17 @@ export default function AllianceMap() {
                 className="z-0 h-screen w-screen"
             >
                 {filteredPartnershipDatas.map(filteredPartnershipData => (
-                    <MapMarker
-                        key={filteredPartnershipData.id}
-                        position={{ lat: filteredPartnershipData.lat, lng: filteredPartnershipData.lng }}
-                        clickable
-                        onClick={() => {
-                            const newBottomSheetStates = [...Open];
-                            newBottomSheetStates[filteredPartnershipData.id] = true;
-                            setOpen(newBottomSheetStates);
-                            setFilOn(false);
-                        }}
-                        image={{
-                            src: categoryType[filteredPartnershipData.category as TCategoryKey].markerImageUrl,
-                            size: {
-                                width: 20,
-                                height: 20,
-                            },
-                            options: {
-                                offset: {
-                                    x: 5,
-                                    y: 0,
-                                },
-                            },
-                        }}
-                    />
+                    <CustomOverlayMap position={{ lat: filteredPartnershipData.lat, lng: filteredPartnershipData.lng }}>
+                        <div
+                            className={`rounded-full h-4 w-4 translate-x-1/2 translate-y-1/2 border-2 border-black ${categoryType[filteredPartnershipData.category as TCategoryKey].className}`}
+                            onClick={() => {
+                                const newBottomSheetStates = [...Open];
+                                newBottomSheetStates[filteredPartnershipData.id] = true;
+                                setOpen(newBottomSheetStates);
+                                setFilOn(false);
+                            }}
+                        />
+                    </CustomOverlayMap>
                 ))}
             </Map>
             {partnershipDatas.map(content => (
