@@ -1,7 +1,7 @@
-import {Map, MapMarker} from "react-kakao-maps-sdk";
-import {BottomSheet} from "react-spring-bottom-sheet";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import BottomNav from "../components/BottomNav";
 
@@ -22,35 +22,17 @@ export default function AllianceMap() {
     const [clickCount2, setClickCount2] = useState(1);
     const [clickCount3, setClickCount3] = useState(1);
     const [clickCount4, setClickCount4] = useState(1);
-    // const [data, setData] = useState(new Array(44).fill(null));
-    const data = getData();
+    const [data, setData] = useState(new Array(44).fill(0));
 
-    console.log(data);
-
-    // console.log(data);
-
-    // useEffect(() => {
-    //     getData().then(d => {
-    //         console.log("good");
-    //         setData(d);
-    //     }).catch(error => {
-    //         console.error(error);
-    //     });
-    // }, []);
-
-    // getData().then(f => {
-    //     let new_temp = [];
-    //     for (let i=0; i<44; i++){
-    //         new_temp = [...data];
-    //         console.log(new_temp);
-    //         set_data(new_temp, f[i]);
-    //     }
-    // });
-
-
-    // setTimeout(() => {
-    //     console.log(data);
-    // }, 100);
+    useEffect(() => {
+        getData()
+            .then(d => {
+                setData(d);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
 
     const handleToggle1 = event => {
         setClickCount1(clickCount1 + 1);
@@ -95,19 +77,6 @@ export default function AllianceMap() {
         setOpen(newBottomSheetStates);
     }
 
-    // function set_data(currentData, column){
-    //     const new_temp = [...currentData];
-    //     console.log(new_temp);
-    //     new_temp[column.id - 64] = {
-    //         index: column.id,
-    //         ally_name: column.name,
-    //         partnership_detail: column.detail,
-    //         lat: String(column.lat),
-    //         lng: String(column.lng),
-    //     };
-    //     setData(new_temp);
-    // }
-
     return (
         <div className="h-screen w-screen">
             <div className="absolute inset-x-0 top-0 z-10 p-2">
@@ -138,19 +107,19 @@ export default function AllianceMap() {
 
             <div className="fixed left-5 top-24 z-50 box-border flex flex-col border-2 border-indigo-400 bg-slate-100">
                 <button className="flex flex-row p-1" onClick={handleToggle1}>
-                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-red-500"/>
+                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-red-500" />
                     <p className={`mr-2 ${!isClicked1 ? "font-bold" : ""}`}>카페 & 디저트</p>
                 </button>
                 <button className="flex flex-row p-1" onClick={handleToggle2}>
-                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-blue-500"/>
+                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-blue-500" />
                     <p className={`mr-2 ${!isClicked2 ? "font-bold" : ""}`}>식당</p>
                 </button>
                 <button className="flex flex-row p-1" onClick={handleToggle3}>
-                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-yellow-500"/>
+                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-yellow-500" />
                     <p className={`mr-2 ${!isClicked3 ? "font-bold" : ""}`}>편의시설</p>
                 </button>
                 <button className="flex flex-row p-1" onClick={handleToggle4}>
-                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-green-500"/>
+                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-green-500" />
                     <p className={`mr-2 ${!isClicked4 ? "font-bold" : ""}`}>주점</p>
                 </button>
             </div>
@@ -162,12 +131,12 @@ export default function AllianceMap() {
             >
                 {data.map(content => (
                     <MapMarker
-                        key={content.index}
+                        key={content.id}
                         position={{ lat: content.lat, lng: content.lng }}
                         clickable
                         onClick={() => {
                             const newBottomSheetStates = [...Open];
-                            newBottomSheetStates[content.index] = true;
+                            newBottomSheetStates[content.id] = true;
                             setOpen(newBottomSheetStates);
                         }}
                         image={{
@@ -188,16 +157,15 @@ export default function AllianceMap() {
             </Map>
             {data.map(content => (
                 <BottomSheet
-                    key={content.index}
-                    open={Open[content.index]}
-                    onDismiss={() => onDismiss(content.index)}
-                    style={{zIndex: 30}}
-                    defaultSnap={({maxHeight}) => maxHeight / 4}
-                    snapPoints={({maxHeight}) => [maxHeight - maxHeight / 10, maxHeight / 4, maxHeight * 0.6]}
+                    key={content.id}
+                    open={Open[content.id]}
+                    onDismiss={() => onDismiss(content.id)}
+                    style={{ zIndex: 30 }}
+                    defaultSnap={({ maxHeight }) => maxHeight / 4}
+                    snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, maxHeight / 4, maxHeight * 0.6]}
                 >
-                    <p>{content.ally_name}</p>
-                    <p>{content.partnership_detail}</p>
-                    <p>{content.review}</p>
+                    <p>{content.name}</p>
+                    <p>{content.detail}</p>
                 </BottomSheet>
             ))}
             <BottomNav />
