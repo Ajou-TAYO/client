@@ -5,21 +5,21 @@ import axios from "axios";
 import BusMap from "./BusMap";
 import BottomNav from "../components/BottomNav";
 
-async function currentTimer() {
+function currentTimer() {
     const date = new Date();
     const hours = date.getHours();
     const min = date.getMinutes();
     return hours * 60 + min;
 }
 
-function BusPage() {
+export default function BusPage() {
+    const [boardContent, setBoardContent] = useState("");
     const fromGawngTime = [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050]; //max 9
     const toGawngTime = [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1085]; //max 10
     const fromSuwonTime = [510, 590, 680]; //max 2
     const toSuwonTime = [910, 1000, 1085];
-    const [boardContent, setBoardContent] = useState("");
-    const [nowTime, setNow] = useState(0);
-    const [queue, setQueue] = useState(new Array(8).fill(-1));
+    const [nowTime, setNow] = useState(currentTimer());
+    const [queue, setQueue] = useState(new Array(8).fill(""));
 
     function findTimeZone(now: number) { //from g1 g2 to g1 g2 from s1 s2 to s1 s2
         let gf: number;
@@ -51,10 +51,38 @@ function BusPage() {
             }
         }
 
-        if(gf == 9)
+        return [
+            fromGawngTime[gf] ? fromGawngTime[gf] - nowTime : -1,
+            fromGawngTime[gf + 1] ? fromGawngTime[gf + 1] - nowTime : -1,
+            toGawngTime[gt] ? toGawngTime[gt] - nowTime : -1,
+            toGawngTime[gt + 1] ? toGawngTime[gt + 1] - nowTime : -1,
+            fromSuwonTime[sf] ? fromSuwonTime[sf] - nowTime : -1,
+            fromSuwonTime[sf + 1] ? fromSuwonTime[sf + 1] - nowTime : -1,
+            toSuwonTime[st] ? toSuwonTime[st] - nowTime : -1,
+            toSuwonTime[st + 1] ? toSuwonTime[st + 1] - nowTime : -1,
+        ];
     }
-function BusPage() {
-    const [boardContent, setBoardContent] = useState("");
+
+    function convertQueue(numQueue: number[]) {
+        const convertString = (min: number) => {
+            if (min === -1) {
+                return "운행 종료";
+            }
+            return Math.trunc(min / 60)
+                ? `${String(Math.trunc(min / 60))} 시간 ${String(min % 60)} 분 뒤 출발`
+                : `${String(min % 60)} 분 뒤 출발`;
+        };
+        return [
+            convertString(numQueue[0]),
+            convertString(numQueue[1]),
+            convertString(numQueue[2]),
+            convertString(numQueue[3]),
+            convertString(numQueue[4]),
+            convertString(numQueue[5]),
+            convertString(numQueue[6]),
+            convertString(numQueue[7]),
+        ];
+    }
 
     useEffect(() => {
         const getBoard = async () => {
@@ -67,25 +95,18 @@ function BusPage() {
                 setBoardContent("");
             }
         };
-        currentTimer().then(res => {
-            setNow(res);
-        });
+        setQueue(convertQueue(findTimeZone(nowTime)));
 
         setInterval(() => {
-            currentTimer().then(res => {
-                setNow(res);
-            });
+            setNow(currentTimer());
+            setQueue(convertQueue(findTimeZone(nowTime)));
         }, 30000);
-
-
-
         getBoard();
     }, []);
 
     return (
         <div className="h-screen w-screen">
             <BusMap />
-
             <div className="absolute inset-x-0 top-0 z-10 p-2">
                 <div className="navbar bg-primary text-primary-content rounded-box shadow-xl">
                     <div className="flex-none">
@@ -146,8 +167,8 @@ function BusPage() {
                                 <div className="font-bold">아주대행</div>
 
                                 <div className="flex flex-col text-red-500">
-                                    <div>{findTimeZone(nowTime)[0]}</div>
-                                    <div>{findTimeZone(nowTime)[1]}</div>
+                                    <div>{queue[0]}</div>
+                                    <div>{queue[1]}</div>
                                 </div>
                             </li>
 
@@ -155,8 +176,8 @@ function BusPage() {
                                 <div className="font-bold">광교중앙역행</div>
 
                                 <div className="flex flex-col text-red-500">
-                                    <div>15분 뒤 출발</div>
-                                    <div>47분 뒤 출발</div>
+                                    <div>{queue[2]}</div>
+                                    <div>{queue[3]}</div>
                                 </div>
                             </li>
                         </ul>
@@ -169,8 +190,8 @@ function BusPage() {
                                 <div className="font-bold">아주대행</div>
 
                                 <div className="flex flex-col text-red-500">
-                                    <div>{findTimeZone(nowTime)[2]}</div>
-                                    <div>{findTimeZone(nowTime)[3]}</div>
+                                    <div>{queue[4]}</div>
+                                    <div>{queue[5]}</div>
                                 </div>
                             </li>
 
@@ -178,8 +199,8 @@ function BusPage() {
                                 <div className="font-bold">수원역행</div>
 
                                 <div className="flex flex-col text-red-500">
-                                    <div>15분 뒤 출발</div>
-                                    <div>47분 뒤 출발</div>
+                                    <div>{queue[6]}</div>
+                                    <div>{queue[7]}</div>
                                 </div>
                             </li>
                         </ul>
@@ -190,5 +211,3 @@ function BusPage() {
         </div>
     );
 }
-
-export default BusPage;
