@@ -1,7 +1,7 @@
-import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BottomNav from "../components/BottomNav";
 
@@ -11,61 +11,55 @@ async function getData() {
     return response.data.data;
 }
 
+const categoryType = {
+    CAFE: {
+        title: "카페 / 디저트",
+        className: "bg-red-500",
+    },
+    RESTAURANT: {
+        title: "식당",
+        className: "bg-blue-500",
+    },
+    PUB: {
+        title: "주점",
+        className: "bg-green-500",
+    },
+    ETC: {
+        title: "기타",
+        className: "bg-yellow-500",
+    },
+};
+
+type TCategoryKey = keyof typeof categoryType;
+
 export default function AllianceMap() {
+    const categoryKeys = Object.keys(categoryType) as unknown as TCategoryKey[];
+
+    const [categoryFilterStatus, setCategoryFilterStatus] = useState(
+        Object.fromEntries(categoryKeys.map(categoryKey => [categoryKey, true])) as unknown as {
+            [key in TCategoryKey]: boolean;
+        },
+    );
+
     const [Open, setOpen] = useState(new Array(107).fill(false));
-    const [Show, setShow] = useState([true, true, true, true]);
-    const [isClicked1, setIsClicked1] = useState(false);
-    const [isClicked2, setIsClicked2] = useState(false);
-    const [isClicked3, setIsClicked3] = useState(false);
-    const [isClicked4, setIsClicked4] = useState(false);
     const [filOn, setFilOn] = useState(true);
-    const [data, setData] = useState(new Array(44).fill(0));
+    const [partnershipDatas, setPartnershipDatas] = useState<any[]>([]);
 
     useEffect(() => {
         getData()
             .then(d => {
-                setData(d);
+                setPartnershipDatas(d);
             })
             .catch(error => {
                 console.error(error);
             });
     }, []);
 
-    // console.log(data);
-
-    function filter(index: number) {
-        const newFilterState = [...Show];
-        if (Show[index] === true) {
-            newFilterState[index] = false;
-        } else {
-            newFilterState[index] = true;
-        }
-        setShow([...newFilterState]);
-    }
-
-    const handleToggle1 = event => {
-        // 카페&디저트
-        filter(0);
-        setIsClicked1(!isClicked1);
-    };
-
-    const handleToggle2 = event => {
-        // 식당
-        filter(1);
-        setIsClicked2(!isClicked2);
-    };
-
-    const handleToggle3 = event => {
-        // 편의시설
-        filter(2);
-        setIsClicked3(!isClicked3);
-    };
-
-    const handleToggle4 = event => {
-        // 주점
-        filter(3);
-        setIsClicked4(!isClicked4);
-    };
+    const filteredPartnershipDatas = useMemo(() => {
+        return partnershipDatas.filter(
+            partnershipData => categoryFilterStatus[partnershipData.category as TCategoryKey],
+        );
+    }, [partnershipDatas, categoryFilterStatus]);
 
     function onDismiss(markerindex) {
         const newBottomSheetStates = [...Open];
@@ -73,34 +67,6 @@ export default function AllianceMap() {
         setOpen(newBottomSheetStates);
         setFilOn(true);
     }
-
-    function check_filter_is(str: string) {
-        if (str === "CAFE" || str === "ETC") {
-            return Show[0];
-        }
-        if (str === "RESTAURANT") {
-            return Show[1];
-        }
-        if (str === "PUB") {
-            return Show[3];
-        }
-        return Show[2];
-    }
-
-    function check_filter_type(str: string) {
-        if (str === "CAFE" || str === "ETC") {
-            return 0;
-        }
-        if (str === "RESTAURANT") {
-            return 1;
-        }
-        if (str === "PUB") {
-            return 3;
-        }
-        return 2;
-    }
-
-    const marker_img = ["/red_dot.png", "/blue_dot.png", "/yellow_dot.png", "/green_dot.png"];
 
     return (
         <div className="h-screen w-screen">
@@ -132,22 +98,22 @@ export default function AllianceMap() {
 
             {filOn ? (
                 <div className="fixed left-5 top-24 z-10 box-border flex flex-col border-2 border-indigo-400 bg-slate-100">
-                    <button className="flex flex-row p-1" onClick={handleToggle1}>
-                        <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-red-500" />
-                        <p className={`mr-2 ${!isClicked1 ? "font-bold" : ""}`}>카페 & 디저트</p>
-                    </button>
-                    <button className="flex flex-row p-1" onClick={handleToggle2}>
-                        <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-blue-500" />
-                        <p className={`mr-2 ${!isClicked2 ? "font-bold" : ""}`}>식당</p>
-                    </button>
-                    <button className="flex flex-row p-1" onClick={handleToggle3}>
-                        <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-yellow-500" />
-                        <p className={`mr-2 ${!isClicked3 ? "font-bold" : ""}`}>편의시설</p>
-                    </button>
-                    <button className="flex flex-row p-1" onClick={handleToggle4}>
-                        <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-green-500" />
-                        <p className={`mr-2 ${!isClicked4 ? "font-bold" : ""}`}>주점</p>
-                    </button>
+                    {categoryKeys.map(categoryKey => (
+                        <button
+                            className="flex flex-row p-1"
+                            onClick={() => {
+                                setCategoryFilterStatus(prev => ({
+                                    ...prev,
+                                    [categoryKey]: !prev[categoryKey],
+                                }));
+                            }}
+                        >
+                            <div className={`mx-2 mt-1 h-4 w-4 rounded-full ${categoryType[categoryKey].className}`} />
+                            <p className={`mr-2 ${categoryFilterStatus[categoryKey] ? "font-bold" : ""}`}>
+                                {categoryType[categoryKey].title}
+                            </p>
+                        </button>
+                    ))}
                 </div>
             ) : null}
 
@@ -156,37 +122,21 @@ export default function AllianceMap() {
                 level={3}
                 className="z-0 h-screen w-screen"
             >
-                {data.map(
-                    content =>
-                        check_filter_is(content.category) && (
-                            <MapMarker
-                                key={content.id}
-                                position={{ lat: content.lat, lng: content.lng }}
-                                clickable
-                                onClick={() => {
-                                    const newBottomSheetStates = [...Open];
-                                    newBottomSheetStates[content.id] = true;
-                                    setOpen(newBottomSheetStates);
-                                    setFilOn(false);
-                                }}
-                                image={{
-                                    src: marker_img[check_filter_type(content.category)],
-                                    size: {
-                                        width: 20,
-                                        height: 20,
-                                    },
-                                    options: {
-                                        offset: {
-                                            x: 5,
-                                            y: 0,
-                                        },
-                                    },
-                                }}
-                            />
-                        ),
-                )}
+                {filteredPartnershipDatas.map(filteredPartnershipData => (
+                    <CustomOverlayMap position={{ lat: filteredPartnershipData.lat, lng: filteredPartnershipData.lng }}>
+                        <div
+                            className={`rounded-full h-4 w-4 translate-x-1/2 translate-y-1/2 border-2 border-black ${categoryType[filteredPartnershipData.category as TCategoryKey].className}`}
+                            onClick={() => {
+                                const newBottomSheetStates = [...Open];
+                                newBottomSheetStates[filteredPartnershipData.id] = true;
+                                setOpen(newBottomSheetStates);
+                                setFilOn(false);
+                            }}
+                        />
+                    </CustomOverlayMap>
+                ))}
             </Map>
-            {data.map(content => (
+            {partnershipDatas.map(content => (
                 <BottomSheet
                     key={content.id}
                     open={Open[content.id]}

@@ -9,7 +9,7 @@ export default function FindPw() {
         console.log(idForFind);
         return axios
             .post(
-                "http://localhost:8080/members/password/find",
+                "http://202.30.29.204:8080/members/password/find",
                 {
                     email: idForFind,
                 },
@@ -73,11 +73,6 @@ export default function FindPw() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="h-32 w-full bg-blue-100 p-5">
-                <div className="py-2 text-sm font-bold text-gray-500">장우성여친구함</div>
-                <div className="text-xs text-gray-500">개인정보처리방침 | 이용약관</div>
-                <div className="text-xs text-gray-500">Copyright © 장우성여친구함. All Rights Reserved.</div>
             </div>
         </div>
     );

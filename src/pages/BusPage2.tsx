@@ -1,6 +1,4 @@
-import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
-import BusMap from "./BusMap";
 
 function BusPage2() {
     return (
@@ -30,73 +28,77 @@ function BusPage2() {
                     <div className="flex-none" />
                 </div>
             </div>
-            <div className="mt-20 space-y-4 p-4">
-                <div className="text-lg font-bold">아주대학교 - 수원역</div>
+            <div className="flex h-full flex-col space-y-4 p-4 pt-24">
+                <select className="select select-bordered w-full md:max-w-xs">
+                    <option selected>아주대학교 - 수원역</option>
+                    <option>아주대학교 - 광교중앙역</option>
+                </select>
 
-                <div>
-                    <div className="font-bold">등교 노선</div>
-                    <div className="overflow-x-auto">
-                        <table className="table w-full">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th>출발시각</th>
-                                    <th>출발장소</th>
-                                    <th>도착장소</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>08:20</th>
-                                    <td>수원역 9번/10번 출구 중간지점</td>
-                                    <td>율곡관 건물 입구 → 원천관 건물 입구</td>
-                                </tr>
-                                <tr>
-                                    <th>09:50</th>
-                                    <td>수원역 9번/10번 출구 중간지점</td>
-                                    <td>율곡관 건물 입구 → 원천관 건물 입구</td>
-                                </tr>
-                                <tr>
-                                    <th>11:20</th>
-                                    <td>수원역 9번/10번 출구 중간지점</td>
-                                    <td>도서관 옆 통학버스 승강장</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div className="flex flex-1 flex-col xl:flex-row items-stretch gap-4">
+                    <div className="flex-1">
+                        <div className="font-bold">등교 노선</div>
+                        <div className="overflow-x-auto">
+                            <table className="table w-full">
+                                {/* head */}
+                                <thead>
+                                    <tr>
+                                        <th>출발시각</th>
+                                        <th>출발장소</th>
+                                        <th>도착장소</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>08:20</th>
+                                        <td>수원역 9번/10번 출구 중간지점</td>
+                                        <td>율곡관 건물 입구 → 원천관 건물 입구</td>
+                                    </tr>
+                                    <tr>
+                                        <th>09:50</th>
+                                        <td>수원역 9번/10번 출구 중간지점</td>
+                                        <td>율곡관 건물 입구 → 원천관 건물 입구</td>
+                                    </tr>
+                                    <tr>
+                                        <th>11:20</th>
+                                        <td>수원역 9번/10번 출구 중간지점</td>
+                                        <td>도서관 옆 통학버스 승강장</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-              <div className="divider" />
-                <div>
-                    <div className="font-bold">하교 노선</div>
-                    <div className="overflow-x-auto">
-                        <table className="table w-full">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th>출발시각</th>
-                                    <th>출발장소</th>
-                                    <th>도착장소</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>15:10</th>
-                                    <td>도서관 옆 통학버스 승강장</td>
-                                    <td>수원역 9번/10번 출구 중간지점</td>
-                                </tr>
-                                <tr>
-                                    <th>16:40</th>
-                                    <td>도서관 옆 통학버스 승강장</td>
-                                    <td>수원역 9번/10번 출구 중간지점</td>
-                                </tr>
-                                <tr>
-                                    <th>18:10</th>
-                                    <td>율곡관 건물 입구 → 원천관 건물 입구</td>
-                                    <td>수원역 9번/10번 출구 중간지점</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div className="flex-1">
+                        <div className="font-bold">하교 노선</div>
+                        <div className="overflow-x-auto">
+                            <table className="table w-full">
+                                {/* head */}
+                                <thead>
+                                    <tr>
+                                        <th>출발시각</th>
+                                        <th>출발장소</th>
+                                        <th>도착장소</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>15:10</th>
+                                        <td>도서관 옆 통학버스 승강장</td>
+                                        <td>수원역 9번/10번 출구 중간지점</td>
+                                    </tr>
+                                    <tr>
+                                        <th>16:40</th>
+                                        <td>도서관 옆 통학버스 승강장</td>
+                                        <td>수원역 9번/10번 출구 중간지점</td>
+                                    </tr>
+                                    <tr>
+                                        <th>18:10</th>
+                                        <td>율곡관 건물 입구 → 원천관 건물 입구</td>
+                                        <td>수원역 9번/10번 출구 중간지점</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

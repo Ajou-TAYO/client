@@ -53,6 +53,8 @@ function BusPage() {
 
         if(gf == 9)
     }
+function BusPage() {
+    const [boardContent, setBoardContent] = useState("");
 
     useEffect(() => {
         const getBoard = async () => {
@@ -74,8 +76,8 @@ function BusPage() {
                 setNow(res);
             });
         }, 30000);
-        
-        
+
+
 
         getBoard();
     }, []);

@@ -11,6 +11,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@headlessui/tailwindcss": "^0.1.2",
+    "@tanstack/react-query": "^4.29.12",
+    "@tanstack/react-query-devtools": "^4.29.12",
     "axios": "^1.4.0",
     "daisyui": "^2.51.5",
     "react": "^18.2.0",
@@ -18,6 +20,7 @@
     "react-kakao-maps-sdk": "^1.1.6",
     "react-router-dom": "^6.10.0",
     "react-spring-bottom-sheet": "^3.5.0-alpha.0",
+    "reconnecting-websocket": "^4.4.0",
     "svg-path-properties": "^1.1.0"
   },
   "devDependencies": {

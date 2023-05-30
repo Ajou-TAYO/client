@@ -1,6 +1,6 @@
 // SignUp.tsx
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, setState } from "react";
 import axios from "axios";
 
 function SignUp() {
@@ -8,6 +8,8 @@ function SignUp() {
     const [num, setVerifyNum] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPwck] = useState("");
+    const [isEqual, setIsEqual] = useState(false);
+    const [isValid, setIsValid] = useState(false);
 
     function postSignUpData() {
         console.log(id, num, password);
@@ -23,6 +25,7 @@ function SignUp() {
             )
             .then(response => {
                 console.log(response.data);
+                window.location.href = "/login";
                 // 회원가입 성공 처리
             })
             .catch(error => {
@@ -47,7 +50,7 @@ function SignUp() {
                         email: id,
                     })
                     .then(response => {
-                        alert("입력하신 이메일로 인증번호가 전송되었습니다.")
+                        alert("입력하신 이메일로 인증번호가 전송되었습니다.");
                         console.log(response.data);
                         // 이메일 인증 성공 처리
                     })
@@ -56,7 +59,7 @@ function SignUp() {
                         console.error(error);
                         // 이메일 인증 실패 처리
                     });
-                })
+            })
             .catch(error => {
                 alert("이미 가입된 이메일입니다.");
                 console.error(error);
@@ -69,6 +72,39 @@ function SignUp() {
         e.preventDefault();
     };
 
+    const validatePassword = password => {
+        console.log("test : ", password);
+        if (password.length <= 8) {
+            setIsValid(false);
+        } else if (!/[a-zA-Z]/.test(password)) {
+            setIsValid(false);
+        } else if (!/\d/.test(password)) {
+            setIsValid(false);
+        } else {
+            setIsValid(true);
+        }
+    };
+
+    const passwordChange = event => {
+        const pwvalue = event.target.value;
+        setPassword(pwvalue);
+        console.log("password : ", pwvalue);
+        validatePassword(pwvalue);
+    };
+
+    const checkPassword = passwordCheck => {
+        console.log("check : ", passwordCheck);
+        console.log("check2 : ", password);
+        if (passwordCheck.length == 0) {
+            console.log("false");
+            setIsEqual(false);
+        } else if (password != passwordCheck) {
+            setIsEqual(false);
+        } else {
+            setIsEqual(true);
+        }
+    };
+
     return (
         <div>
             <div className="relative">
@@ -77,54 +113,46 @@ function SignUp() {
                         <p className="pb-4 text-center text-xl font-bold text-blue-900">회원가입</p>
                         <div className="mb-10">
                             <form onSubmit={SignFunc}>
-                                <div className="mb-5">
-                                    <div className="box-border pb-3">
-                                        <label htmlFor="email">* 이메일</label>
-                                    </div>
-                                    <div className="auto container box-border">
-                                        <div className="container flex h-9 rounded-sm border border-gray-300">
-                                            <input
-                                                type="text"
-                                                onChange={event => setId(event.target.value)}
-                                                className="text-m relative inline-flex w-full p-1 px-2"
-                                                placeholder="ajoulife@ajou.ac.kr"
-                                            />
-                                            <div className="relative">
-                                                <button
-                                                    onClick={postEmailCert}
-                                                    className="h-9 w-10 rounded-sm bg-blue-500 text-sm font-bold text-white"
-                                                >
-                                                    인증
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="relative mt-2 flex items-center">
-                                        <span className="text-xs text-gray-400">
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">* 이메일</span>
+                                    </label>
+                                    <label className="input-group">
+                                        <input
+                                            type="text"
+                                            placeholder="ajoulife@ajou.ac.kr"
+                                            className="input input-bordered flex-1"
+                                            value={id}
+                                            onChange={event => setId(event.target.value)}
+                                        />
+                                        <button className="btn" onClick={postEmailCert}>인증</button>
+                                    </label>
+
+                                    <label className="label">
+                                        <span className="label-text text-xs text-gray-400">
                                             아주대학교 포탈에서 사용 중인 이메일을 정확하게 입력해 주세요. 해당 이메일로
                                             가입 인증 메일이 발송됩니다.
                                         </span>
-                                    </div>
-                                </div>
-                                <div className="mb-5">
-                                    <div className="box-border pb-3">
-                                        <label htmlFor="email">* 인증번호</label>
-                                    </div>
-                                    <div className="auto container box-border">
-                                        <div className="container relative rounded-sm border border-gray-300">
-                                            <input
-                                                type="text"
-                                                onChange={event => setVerifyNum(event.target.value)}
-                                                className="text-m relative inline-flex w-full p-1"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="relative mt-2 flex items-center">
-                                        <span className="text-xs text-gray-400">
+                                    </label>
+
+                                    <label className="label">
+                                        <span className="label-text">* 인증번호</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="인증번호"
+                                        className="input input-bordered "
+                                        value={num}
+                                        onChange={event => setVerifyNum(event.target.value)}
+                                    />
+
+                                    <label className="label">
+                                        <span className="label-text text-xs text-gray-400">
                                             입력한 이메일로 전송된 인증번호를 정확하게 입력해주세요.
                                         </span>
-                                    </div>
+                                    </label>
                                 </div>
+
                                 <div className="mb-5">
                                     <div className="box-border pb-3">
                                         <label htmlFor="email">* 비밀번호</label>
@@ -133,15 +161,22 @@ function SignUp() {
                                         <div className="container relative rounded-sm border border-gray-300">
                                             <input
                                                 type="password"
-                                                onChange={event => setPassword(event.target.value)}
+                                                value={password}
+                                                onChange={passwordChange}
                                                 className="text-m relative inline-flex w-full p-1"
                                             />
                                         </div>
                                     </div>
                                     <div className="relative mt-2 flex items-center">
-                                        <span className="text-xs text-gray-400">
-                                            8자 이상의 영문 숫자 혼합의 비밀번호를 설정해 주세요.
-                                        </span>
+                                        {!isValid ? (
+                                            <span className="text-xs text-gray-400">
+                                                8자 이상의 영문 숫자 혼합의 비밀번호를 설정해 주세요.
+                                            </span>
+                                        ) : (
+                                            <span className="text-xs text-green-400">
+                                                올바른 형식의 비밀번호입니다!
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="mb-5">
@@ -152,38 +187,34 @@ function SignUp() {
                                         <div className="container relative rounded-sm border border-gray-300">
                                             <input
                                                 type="password"
-                                                onChange={event => setPwck(event.target.value)}
+                                                onChange={event => checkPassword(event.target.value)}
                                                 className="text-m relative inline-flex w-full p-1"
                                             />
                                         </div>
                                     </div>
                                     <div className="relative mt-2 flex items-center">
-                                        <span className="text-xs text-gray-400">
-                                            비밀번호를 한 번 더 입력해 주세요.
-                                        </span>
+                                        {!isEqual ? (
+                                            <span className="text-xs text-gray-400">
+                                                비밀번호를 한 번 더 입력해 주세요.
+                                            </span>
+                                        ) : (
+                                            <span className="text-xs text-green-400">비밀번호와 일치합니다!</span>
+                                        )}
                                     </div>
                                 </div>
-                                <Link
-                                    to="/login">
-                                    <div className="mb-5 align-top">
-                                        <button
-                                            type="submit"
-                                            onClick={postSignUpData}
-                                            className="my-5 h-9 w-full rounded-sm bg-blue-500 text-sm font-bold text-white"
-                                        >
-                                            가입
-                                        </button>
-                                    </div>
-                                </Link>
+                                <div className="mb-5 align-top">
+                                    <button
+                                        type="submit"
+                                        onClick={postSignUpData}
+                                        className="btn w-full"
+                                    >
+                                        가입
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="h-32 w-full bg-blue-100 p-5">
-                <div className="py-2 text-sm font-bold text-gray-500">장우성여친구함</div>
-                <div className="text-xs text-gray-500">개인정보처리방침 | 이용약관</div>
-                <div className="text-xs text-gray-500">Copyright © 장우성여친구함. All Rights Reserved.</div>
             </div>
         </div>
     );
