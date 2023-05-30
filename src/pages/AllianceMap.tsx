@@ -18,6 +18,7 @@ export default function AllianceMap() {
     const [isClicked2, setIsClicked2] = useState(false);
     const [isClicked3, setIsClicked3] = useState(false);
     const [isClicked4, setIsClicked4] = useState(false);
+    const [filOn, setFilOn] = useState(true);
     const [data, setData] = useState(new Array(44).fill(0));
 
     useEffect(() => {
@@ -70,6 +71,7 @@ export default function AllianceMap() {
         const newBottomSheetStates = [...Open];
         newBottomSheetStates[markerindex] = false;
         setOpen(newBottomSheetStates);
+        setFilOn(true);
     }
 
     function check_filter_is(str: string) {
@@ -128,24 +130,26 @@ export default function AllianceMap() {
                 </div>
             </div>
 
-            <div className="fixed left-5 top-24 z-50 box-border flex flex-col border-2 border-indigo-400 bg-slate-100">
-                <button className="flex flex-row p-1" onClick={handleToggle1}>
-                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-red-500" />
-                    <p className={`mr-2 ${!isClicked1 ? "font-bold" : ""}`}>카페 & 디저트</p>
-                </button>
-                <button className="flex flex-row p-1" onClick={handleToggle2}>
-                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-blue-500" />
-                    <p className={`mr-2 ${!isClicked2 ? "font-bold" : ""}`}>식당</p>
-                </button>
-                <button className="flex flex-row p-1" onClick={handleToggle3}>
-                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-yellow-500" />
-                    <p className={`mr-2 ${!isClicked3 ? "font-bold" : ""}`}>편의시설</p>
-                </button>
-                <button className="flex flex-row p-1" onClick={handleToggle4}>
-                    <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-green-500" />
-                    <p className={`mr-2 ${!isClicked4 ? "font-bold" : ""}`}>주점</p>
-                </button>
-            </div>
+            {filOn ? (
+                <div className="fixed left-5 top-24 z-10 box-border flex flex-col border-2 border-indigo-400 bg-slate-100">
+                    <button className="flex flex-row p-1" onClick={handleToggle1}>
+                        <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-red-500" />
+                        <p className={`mr-2 ${!isClicked1 ? "font-bold" : ""}`}>카페 & 디저트</p>
+                    </button>
+                    <button className="flex flex-row p-1" onClick={handleToggle2}>
+                        <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-blue-500" />
+                        <p className={`mr-2 ${!isClicked2 ? "font-bold" : ""}`}>식당</p>
+                    </button>
+                    <button className="flex flex-row p-1" onClick={handleToggle3}>
+                        <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-yellow-500" />
+                        <p className={`mr-2 ${!isClicked3 ? "font-bold" : ""}`}>편의시설</p>
+                    </button>
+                    <button className="flex flex-row p-1" onClick={handleToggle4}>
+                        <div className="mx-2 mt-1 h-4 w-4 rounded-full bg-green-500" />
+                        <p className={`mr-2 ${!isClicked4 ? "font-bold" : ""}`}>주점</p>
+                    </button>
+                </div>
+            ) : null}
 
             <Map
                 center={{ lat: 37.27771738352343, lng: 127.04382834467262 }}
@@ -163,6 +167,7 @@ export default function AllianceMap() {
                                     const newBottomSheetStates = [...Open];
                                     newBottomSheetStates[content.id] = true;
                                     setOpen(newBottomSheetStates);
+                                    setFilOn(false);
                                 }}
                                 image={{
                                     src: marker_img[check_filter_type(content.category)],
@@ -190,8 +195,9 @@ export default function AllianceMap() {
                     defaultSnap={({ maxHeight }) => maxHeight / 4}
                     snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, maxHeight / 4, maxHeight * 0.6]}
                 >
-                    <p>{content.name}</p>
-                    <p>{content.detail}</p>
+                    <p className="m-8 text-center text-4xl">{content.name}</p>
+                    <img src={`/${content.id}.jpg`} className="object-contain p-12" alt="해당 점포 이미지" />
+                    <p className="text-center text-2xl">{content.detail}</p>
                 </BottomSheet>
             ))}
             <BottomNav />

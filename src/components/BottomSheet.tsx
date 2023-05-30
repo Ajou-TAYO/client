@@ -15,7 +15,7 @@ function BottomSheet({ children }: { children: React.ReactNode }) {
     return (
         <div
             ref={sheet}
-            className="fixed inset-x-0 z-10 rounded-t-2xl bg-white transition-transform"
+            className="fixed inset-x-0 z-30 rounded-t-2xl bg-white transition-transform"
             style={{ height: `${BOTTOM_SHEET_HEIGHT}px`, top: "calc(100% - 90px)" }}
         >
             <Handle />
