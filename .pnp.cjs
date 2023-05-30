@@ -57,6 +57,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-kakao-maps-sdk", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:1.1.8"],\
             ["react-router-dom", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:6.10.0"],\
             ["react-spring-bottom-sheet", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:3.5.0-alpha.0"],\
+            ["reconnecting-websocket", "npm:4.4.0"],\
             ["svg-path-properties", "npm:1.1.0"],\
             ["tailwindcss", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:3.3.1"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"],\
@@ -2196,6 +2197,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-kakao-maps-sdk", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:1.1.8"],\
             ["react-router-dom", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:6.10.0"],\
             ["react-spring-bottom-sheet", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:3.5.0-alpha.0"],\
+            ["reconnecting-websocket", "npm:4.4.0"],\
             ["svg-path-properties", "npm:1.1.0"],\
             ["tailwindcss", "virtual:67bccc7d0bcfa1230f52b04f252953235f3247e8df364142a4b7724e7369b822323dc3148cf3825512a8c0b70e04e7501cbd67f5ac8193999d7bc7a9f219cccb#npm:3.3.1"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"],\
@@ -5497,6 +5499,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["readdirp", "npm:3.6.0"],\
             ["picomatch", "npm:2.3.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["reconnecting-websocket", [\
+        ["npm:4.4.0", {\
+          "packageLocation": "./.yarn/cache/reconnecting-websocket-npm-4.4.0-c6f262f5df-7ee379ff3a.zip/node_modules/reconnecting-websocket/",\
+          "packageDependencies": [\
+            ["reconnecting-websocket", "npm:4.4.0"]\
           ],\
           "linkType": "HARD"\
         }]\

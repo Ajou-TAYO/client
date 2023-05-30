@@ -20,6 +20,7 @@
     "react-kakao-maps-sdk": "^1.1.6",
     "react-router-dom": "^6.10.0",
     "react-spring-bottom-sheet": "^3.5.0-alpha.0",
+    "reconnecting-websocket": "^4.4.0",
     "svg-path-properties": "^1.1.0"
   },
   "devDependencies": {

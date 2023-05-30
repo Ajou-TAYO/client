@@ -39,7 +39,7 @@ const BottomTab: React.FC = () => {
                     return classNames.join(" ");
                 }}
             >
-                <p className="text-primary font-semibold">bus</p>
+                <p className="text-primary font-semibold">실시간 버스</p>
             </NavLink>
 
             <NavLink
@@ -64,7 +64,7 @@ const BottomTab: React.FC = () => {
                     return classNames.join(" ");
                 }}
             >
-                <p className="text-primary font-semibold">alliance</p>
+                <p className="text-primary font-semibold">제휴업체</p>
             </NavLink>
 
             <NavLink
