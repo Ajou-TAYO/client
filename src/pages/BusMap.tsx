@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { Map, Polyline, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { useEffect, useState } from "react";
+import { Map, CustomOverlayMap, MapMarker } from "react-kakao-maps-sdk";
 import ReconnectingWebSocket from "reconnecting-websocket";
+import axios from "axios";
 
 function BusOverlay({ position }: { position: { x: number; y: number } | null }) {
     if (!position) return null;
@@ -26,13 +27,28 @@ function BusOverlay({ position }: { position: { x: number; y: number } | null })
     );
 }
 
+async function getStopData() {
+    // Fetch data from an API or any other source
+    const response = await axios.get("http://202.30.29.204:8080/bus/location/stops", {});
+    // console.log(response.data.data);
+    return response.data.data;
+}
+
 export default function () {
     const [busPosition, setBusPosition] = useState<({ x: number; y: number } | null)[]>(new Array(3).fill(null));
-
     const [isWsOpened, setIsWsOpened] = useState(false);
+    const [stopPosition, setStopPosition] = useState<any[]>([]);
 
     useEffect(() => {
         const rws = new ReconnectingWebSocket("ws://202.30.29.204:8080/bin");
+
+        getStopData()
+            .then(pos => {
+                setStopPosition(pos);
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
         rws.onopen = () => {
             setIsWsOpened(true);
@@ -60,6 +76,8 @@ export default function () {
         };
     }, []);
 
+    console.log(stopPosition);
+
     return (
         <Map
             center={{
@@ -69,6 +87,22 @@ export default function () {
             level={6}
             className="z-0 h-screen w-screen"
         >
+            {stopPosition.length > 0 && (
+                stopPosition.map(p => (
+                    <MapMarker
+                        key={`${p.lat}-${p.lng}`} // Use a unique key for each marker to trigger re-rendering
+                        position={{ lat: p.lat, lng: p.lng }}
+                        image={{
+                            src: "/bus_stop.png",
+                            size: {
+                                width: 30,
+                                height: 35
+                            }
+                        }}
+                    />
+                )))
+            }
+
             {!isWsOpened && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm">
                     <div className="flex flex-col items-center">

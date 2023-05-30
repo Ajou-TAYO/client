@@ -125,7 +125,9 @@ export default function AllianceMap() {
                 {filteredPartnershipDatas.map(filteredPartnershipData => (
                     <CustomOverlayMap position={{ lat: filteredPartnershipData.lat, lng: filteredPartnershipData.lng }}>
                         <div
-                            className={`rounded-full h-4 w-4 translate-x-1/2 translate-y-1/2 border-2 border-black ${categoryType[filteredPartnershipData.category as TCategoryKey].className}`}
+                            className={`h-4 w-4 translate-x-1/2 translate-y-1/2 rounded-full border-2 border-black ${
+                                categoryType[filteredPartnershipData.category as TCategoryKey].className
+                            }`}
                             onClick={() => {
                                 const newBottomSheetStates = [...Open];
                                 newBottomSheetStates[filteredPartnershipData.id] = true;
