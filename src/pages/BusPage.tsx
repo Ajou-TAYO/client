@@ -5,39 +5,79 @@ import axios from "axios";
 import BusMap from "./BusMap";
 import BottomNav from "../components/BottomNav";
 
+async function currentTimer() {
+    const date = new Date();
+    const hours = date.getHours();
+    const min = date.getMinutes();
+    return hours * 60 + min;
+}
+
 function BusPage() {
-    const busTime = "16:40";
+    const fromGawngTime = [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050]; //max 9
+    const toGawngTime = [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1085]; //max 10
+    const fromSuwonTime = [510, 590, 680]; //max 2
+    const toSuwonTime = [910, 1000, 1085];
     const [boardContent, setBoardContent] = useState("");
-    const [timer, setTimer] = useState('0');
+    const [nowTime, setNow] = useState(0);
+    const [queue, setQueue] = useState(new Array(8).fill(-1));
 
-    const currentTimer = () => {
-        const date = new Date();
-        const hours = date.getHours();
-        // const min = String(date.getMinutes()).padStart(2, "0");
-        // setTimer(`${hours}:${min}`);
+    function findTimeZone(now: number) { //from g1 g2 to g1 g2 from s1 s2 to s1 s2
+        let gf: number;
+        let sf: number;
+        let gt: number;
+        let st: number;
+        for (let i = 0; i < fromGawngTime.length; i++) {
+            if (fromGawngTime[i] - now > 0) {
+                gf = i;
+                break;
+            }
+        }
+        for (let j = 0; j < fromSuwonTime.length; j++) {
+            if (fromSuwonTime[j] - now > 0) {
+                sf = j;
+                break;
+            }
+        }
+        for (let k = 0; k < toGawngTime.length; k++) {
+            if (toGawngTime[k] - now > 0) {
+                gt = k;
+                break;
+            }
+        }
+        for (let l = 0; l < toSuwonTime.length; l++) {
+            if (toSuwonTime[l] - now > 0) {
+                st = l;
+                break;
+            }
+        }
 
-        console.log(hours);
+        if(gf == 9)
     }
-
-    const startTimer = () => {
-        setInterval(currentTimer, 1000);
-    }
-    startTimer();
 
     useEffect(() => {
-        // Function to fetch the board content
         const getBoard = async () => {
             try {
                 const response = await axios.get("http://202.30.29.204:8080/bus/boards", {});
                 const { content } = response.data.data[0];
-                setBoardContent(content); // Update the state with the fetched content
+                setBoardContent(content);
             } catch (error) {
                 console.error(error);
-                setBoardContent(""); // Set an empty string if there's an error
+                setBoardContent("");
             }
         };
+        currentTimer().then(res => {
+            setNow(res);
+        });
 
-        getBoard(); // Call the function to fetch the board content
+        setInterval(() => {
+            currentTimer().then(res => {
+                setNow(res);
+            });
+        }, 30000);
+        
+        
+
+        getBoard();
     }, []);
 
     return (
@@ -96,31 +136,52 @@ function BusPage() {
             >
                 <div className="flex flex-col gap-4 px-4">
                     <h2 className="font-bold">운행정보 </h2>
-                    {[...new Array(2)].map(_ => (
-                        <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
-                            <header className="mb-4 font-bold">아주대 - 수원역</header>
+                    <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
+                        <header className="mb-4 font-bold">아주대 - 광교중앙역</header>
 
-                            <ul className="divide-y pl-4">
-                                <li className="flex flex-row items-center justify-between text-sm">
-                                    <div className="font-bold">아주대행</div>
+                        <ul className="divide-y pl-4">
+                            <li className="flex flex-row items-center justify-between text-sm">
+                                <div className="font-bold">아주대행</div>
 
-                                    <div className="flex flex-col text-red-500">
-                                        <div>27분 뒤 출발</div>
-                                        <div>47분 뒤 출발</div>
-                                    </div>
-                                </li>
+                                <div className="flex flex-col text-red-500">
+                                    <div>{findTimeZone(nowTime)[0]}</div>
+                                    <div>{findTimeZone(nowTime)[1]}</div>
+                                </div>
+                            </li>
 
-                                <li className="flex flex-row items-center justify-between text-sm">
-                                    <div className="font-bold">수원역행</div>
+                            <li className="flex flex-row items-center justify-between text-sm">
+                                <div className="font-bold">광교중앙역행</div>
 
-                                    <div className="flex flex-col text-red-500">
-                                        <div>15분 뒤 출발</div>
-                                        <div>47분 뒤 출발</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    ))}
+                                <div className="flex flex-col text-red-500">
+                                    <div>15분 뒤 출발</div>
+                                    <div>47분 뒤 출발</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
+                        <header className="mb-4 font-bold">아주대 - 수원역</header>
+
+                        <ul className="divide-y pl-4">
+                            <li className="flex flex-row items-center justify-between text-sm">
+                                <div className="font-bold">아주대행</div>
+
+                                <div className="flex flex-col text-red-500">
+                                    <div>{findTimeZone(nowTime)[2]}</div>
+                                    <div>{findTimeZone(nowTime)[3]}</div>
+                                </div>
+                            </li>
+
+                            <li className="flex flex-row items-center justify-between text-sm">
+                                <div className="font-bold">수원역행</div>
+
+                                <div className="flex flex-col text-red-500">
+                                    <div>15분 뒤 출발</div>
+                                    <div>47분 뒤 출발</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </BottomSheet>
             <BottomNav />
