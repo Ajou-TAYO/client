@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Map, Polyline, CustomOverlayMap } from "react-kakao-maps-sdk";
 
-const ws: any = new WebSocket("ws://localhost:8080/bus");
+const ws: any = new WebSocket("ws://202.30.29.204:8080/bin");
 
 ws.onopen = () => {};
 

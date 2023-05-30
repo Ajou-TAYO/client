@@ -1,27 +1,44 @@
 import { BottomSheet } from "react-spring-bottom-sheet";
 import { useEffect, useState } from "react";
 import "react-spring-bottom-sheet/dist/style.css";
+import axios from "axios";
 import BusMap from "./BusMap";
 import BottomNav from "../components/BottomNav";
-import axios from "axios";
 
 function BusPage() {
-  const [boardContent, setBoardContent] = useState("");
-  useEffect(() => {
-    // Function to fetch the board content
-    const getBoard = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/bus/boards", {});
-        const content = response.data.data[0].content;
-        setBoardContent(content); // Update the state with the fetched content
-      } catch (error) {
-        console.error(error);
-        setBoardContent(""); // Set an empty string if there's an error
-      }
-    };
+    const busTime = "16:40";
+    const [boardContent, setBoardContent] = useState("");
+    const [timer, setTimer] = useState('0');
 
-    getBoard(); // Call the function to fetch the board content
-  }, []);
+    const currentTimer = () => {
+        const date = new Date();
+        const hours = date.getHours();
+        // const min = String(date.getMinutes()).padStart(2, "0");
+        // setTimer(`${hours}:${min}`);
+
+        console.log(hours);
+    }
+
+    const startTimer = () => {
+        setInterval(currentTimer, 1000);
+    }
+    startTimer();
+
+    useEffect(() => {
+        // Function to fetch the board content
+        const getBoard = async () => {
+            try {
+                const response = await axios.get("http://202.30.29.204:8080/bus/boards", {});
+                const { content } = response.data.data[0];
+                setBoardContent(content); // Update the state with the fetched content
+            } catch (error) {
+                console.error(error);
+                setBoardContent(""); // Set an empty string if there's an error
+            }
+        };
+
+        getBoard(); // Call the function to fetch the board content
+    }, []);
 
     return (
         <div className="h-screen w-screen">
@@ -56,8 +73,8 @@ function BusPage() {
             <div className="absolute inset-x-0 top-20 z-10 flex flex-col items-center">
                 <div className="badge badge-error gap-2">
                     <span className="text-xs">
-                        <span className="font-bold mr-2">[공지]</span>
-                      {boardContent}
+                        <span className="mr-2 font-bold">[공지]</span>
+                        {boardContent}
                     </span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
