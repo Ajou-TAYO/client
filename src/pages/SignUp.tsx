@@ -125,7 +125,7 @@ function SignUp() {
                                             value={id}
                                             onChange={event => setId(event.target.value)}
                                         />
-                                        <button className="btn">인증</button>
+                                        <button className="btn" onClick={postEmailCert}>인증</button>
                                     </label>
 
                                     <label className="label">
