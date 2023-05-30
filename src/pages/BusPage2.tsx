@@ -101,7 +101,6 @@ function BusPage2() {
                     </div>
                 </div>
             </div>
-            <BottomNav />
         </div>
     );
 }

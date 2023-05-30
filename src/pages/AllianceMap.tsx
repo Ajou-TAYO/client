@@ -35,7 +35,7 @@ export default function AllianceMap() {
 
     function filter(index: number) {
         const newFilterState = [...Show];
-        if (Show[index] === true) {
+        if (Show[index]) {
             newFilterState[index] = false;
         } else {
             newFilterState[index] = true;

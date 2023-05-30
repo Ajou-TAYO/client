@@ -9,7 +9,7 @@ export default function FindPw() {
         console.log(idForFind);
         return axios
             .post(
-                "http://localhost:8080/members/password/find",
+                "http://202.30.29.204:8080/members/password/find",
                 {
                     email: idForFind,
                 },

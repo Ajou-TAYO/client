@@ -13,7 +13,7 @@ function LoginForm() {
         console.log(id, password);
         return axios
             .post(
-                "http://localhost:8080/members/login",
+                "http://202.30.29.204:8080/members/login",
                 {
                     email: id,
                     password: password,

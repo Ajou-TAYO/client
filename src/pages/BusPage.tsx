@@ -1,4 +1,3 @@
-import { BottomSheet } from "react-spring-bottom-sheet";
 import { useEffect, useState } from "react";
 import "react-spring-bottom-sheet/dist/style.css";
 import axios from "axios";
@@ -6,23 +5,7 @@ import BusMap from "./BusMap";
 import BottomNav from "../components/BottomNav";
 
 function BusPage() {
-    const busTime = "16:40";
     const [boardContent, setBoardContent] = useState("");
-    const [timer, setTimer] = useState('0');
-
-    const currentTimer = () => {
-        const date = new Date();
-        const hours = date.getHours();
-        // const min = String(date.getMinutes()).padStart(2, "0");
-        // setTimer(`${hours}:${min}`);
-
-        console.log(hours);
-    }
-
-    const startTimer = () => {
-        setInterval(currentTimer, 1000);
-    }
-    startTimer();
 
     useEffect(() => {
         // Function to fetch the board content
@@ -86,7 +69,7 @@ function BusPage() {
                     </svg>
                 </div>
             </div>
-            
+
             {/* <BottomSheet
                 className="bg-base-100"
                 open
@@ -123,7 +106,6 @@ function BusPage() {
                     ))}
                 </div>
             </BottomSheet> */}
-            <BottomNav />
         </div>
     );
 }

@@ -15,7 +15,7 @@ function SignUp() {
         console.log(id, num, password);
         return axios
             .post(
-                "http://localhost:8080/members/signup/",
+                "http://202.30.29.204:8080/members/signup/",
                 {
                     email: id,
                     verificationCode: num,
@@ -38,7 +38,7 @@ function SignUp() {
     function postEmailCert() {
         return axios
             .post(
-                "http://localhost:8080/members/signup/email",
+                "http://202.30.29.204:8080/members/signup/email",
                 {
                     email: id,
                 },
@@ -46,7 +46,7 @@ function SignUp() {
             )
             .then(response => {
                 return axios
-                    .post("http://localhost:8080/members/signup/email/request", {
+                    .post("http://202.30.29.204:8080/members/signup/email/request", {
                         email: id,
                     })
                     .then(response => {

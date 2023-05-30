@@ -69,9 +69,6 @@ export default function LandingPage() {
                     </div>
                 </div>
             </div>
-
-            {/*  Bottom Nav */}
-            <BottomNav />
         </div>
     );
 }
