@@ -44,7 +44,7 @@ const BottomTab: React.FC = () => {
 
             <NavLink
                 end
-                to="/"
+                to="/ajoumap"
                 className={({ isActive, isPending }) => {
                     const classNames = ["text-primary"];
                     if (isPending) classNames.push("pending");

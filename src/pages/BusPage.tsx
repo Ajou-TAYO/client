@@ -87,7 +87,7 @@ export default function BusPage() {
                 return "운행 종료";
             }
             return Math.trunc(min / 60)
-                ? `${String(Math.trunc(min / 60))} 시간 ${String(min % 60)} 분 뒤 출발`
+                ? `${String(Math.trunc(min / 60))} 시간 ${String(min % 60).padStart(2, "0")} 분 뒤 출발`
                 : `${String(min % 60)} 분 뒤 출발`;
         };
         return [

@@ -1,0 +1,15 @@
+.noticeItem {
+    /* 필요한 스타일 추가 */
+    /* 예시로 높이와 너비를 지정 */
+    height: 27px;
+    width: 360px;
+    overflow: hidden;
+}
+
+.itemTitle {
+    font-family: "Gill Sans MT";
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
