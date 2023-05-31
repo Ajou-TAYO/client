@@ -1,9 +1,9 @@
 import "react-spring-bottom-sheet/dist/style.css";
-import { useState } from 'react';
+import { useState } from "react";
 
 // 버스 대여 페이지
 
-const BusPage2 = ({ closeModal }) => {
+function BusPage2({ closeModal }) {
     const openPopup = () => {
         window.open("/bus2", "PopupWindow", "width=100,height=300");
         closeModal();
@@ -11,102 +11,16 @@ const BusPage2 = ({ closeModal }) => {
 
     return (
         <div className="h-screen/2 w-screen/2">
-            <div className="absolute inset-x-0 top-0 z-10 p-2">
-                <div className="navbar bg-primary text-primary-content rounded-box shadow-xl">
-                    <div className="flex-none">
-                        <button className="btn btn-square btn-ghost">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                className="inline-block h-5 w-5 stroke-current"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            </svg>
-                        </button>
+            <div className="flex h-full flex-col space-y-4 p-4 items-center">
+                <div className="flex flex-col items-center space-y-4 text-4xl">버스 대여</div>
+                <div className="flex items-center space-x-20">
+                    <div className="flex flex-col bg-gray-200 items-center object-fit">
+                        출발일
+                        <input type="date" className="border-2 border-black rounded-md h-30" />
                     </div>
-                    <div className="flex-1">
-                        <a className="text-xl font-bold normal-case">Ajou Life</a>
-                    </div>
-                    <div className="flex-none" />
-                </div>
-            </div>
-            <div className="flex h-full flex-col space-y-4 p-4 pt-24">
-                <select className="select select-bordered w-full md:max-w-xs">
-                    <option selected>아주대학교 - 수원역</option>
-                    <option>아주대학교 - 광교중앙역</option>
-                </select>
-
-                <div className="flex flex-1 flex-col xl:flex-row items-stretch gap-4">
-                    <div className="flex-1">
-                        <div className="font-bold">등교 노선</div>
-                        <div className="overflow-x-auto">
-                            <table className="table w-full">
-                                {/* head */}
-                                <thead>
-                                    <tr>
-                                        <th>출발시각</th>
-                                        <th>출발장소</th>
-                                        <th>도착장소</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>08:20</th>
-                                        <td>수원역 9번/10번 출구 중간지점</td>
-                                        <td>율곡관 건물 입구 → 원천관 건물 입구</td>
-                                    </tr>
-                                    <tr>
-                                        <th>09:50</th>
-                                        <td>수원역 9번/10번 출구 중간지점</td>
-                                        <td>율곡관 건물 입구 → 원천관 건물 입구</td>
-                                    </tr>
-                                    <tr>
-                                        <th>11:20</th>
-                                        <td>수원역 9번/10번 출구 중간지점</td>
-                                        <td>도서관 옆 통학버스 승강장</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div className="flex-1">
-                        <div className="font-bold">하교 노선</div>
-                        <div className="overflow-x-auto">
-                            <table className="table w-full">
-                                {/* head */}
-                                <thead>
-                                    <tr>
-                                        <th>출발시각</th>
-                                        <th>출발장소</th>
-                                        <th>도착장소</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>15:10</th>
-                                        <td>도서관 옆 통학버스 승강장</td>
-                                        <td>수원역 9번/10번 출구 중간지점</td>
-                                    </tr>
-                                    <tr>
-                                        <th>16:40</th>
-                                        <td>도서관 옆 통학버스 승강장</td>
-                                        <td>수원역 9번/10번 출구 중간지점</td>
-                                    </tr>
-                                    <tr>
-                                        <th>18:10</th>
-                                        <td>율곡관 건물 입구 → 원천관 건물 입구</td>
-                                        <td>수원역 9번/10번 출구 중간지점</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div className="flex flex-col bg-gray-200 items-center">
+                        도착일
+                        <input type="date" className="border-2 border-black rounded-md h-30" />
                     </div>
                 </div>
             </div>

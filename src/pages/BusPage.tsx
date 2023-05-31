@@ -26,9 +26,9 @@ function useInterval(callback: unknown, delay: number) {
 
 export default function BusPage() {
     const [boardContent, setBoardContent] = useState("");
-    const fromGawngTime = [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050]; //max 9
-    const toGawngTime = [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1085]; //max 10
-    const fromSuwonTime = [510, 590, 680]; //max 2
+    const fromGawngTime = [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050]; // max 9
+    const toGawngTime = [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1085]; // max 10
+    const fromSuwonTime = [510, 590, 680]; // max 2
     const toSuwonTime = [910, 1000, 1085];
     const [nowTime, setNow] = useState(currentTimer());
     const [queue, setQueue] = useState(new Array(8).fill(""));
@@ -38,7 +38,8 @@ export default function BusPage() {
         setModalIsOpen(!modalIsOpen);
     };
 
-    function findTimeZone(now: number) { //from g1 g2 to g1 g2 from s1 s2 to s1 s2
+    function findTimeZone(now: number) {
+        // from g1 g2 to g1 g2 from s1 s2 to s1 s2
         let gf: number;
         let sf: number;
         let gt: number;
@@ -167,74 +168,87 @@ export default function BusPage() {
                 </div>
             </div>
 
-            <div className="fixed top-20 right-2 flex justify-center items-center">
-                <div className="rounded-full bg-orange-500 w-12 h-12 flex justify-center items-center">
+            <div className="fixed right-2 top-20 flex items-center justify-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-500">
                     <button type="button" onClick={setModal}>
-                        <img src="/rent_bus.png" className="w-3/4 h-3/4" style={{transform: 'translate(15%, 0%)'}}/>
+                        <img src="/rent_bus.png" className="h-3/4 w-3/4" style={{ transform: "translate(15%, 0%)" }} />
                     </button>
-                    <ReactModal isOpen={modalIsOpen} onRequestClose={setModal} contentLabel="BusPage2 Modal">
+                    <ReactModal
+                        isOpen={modalIsOpen}
+                        onRequestClose={setModal}
+                        contentLabel="BusPage2 Modal"
+                        style={{
+                            content: {
+                                width: "500px", // Set the desired width
+                                height: "700px", // Set the desired height
+                                margin: "auto", // Center the modal horizontally
+                            },
+                        }}
+                    >
                         {modalIsOpen && <BusPage2 closeModal={setModal} />}
                     </ReactModal>
                 </div>
             </div>
 
-            <BottomSheet
-                className="bg-base-100"
-                open
-                blocking={false}
-                expandOnContentDrag
-                snapPoints={({ maxHeight }) => [maxHeight / 4, maxHeight * 0.6]}
-            >
-                <div className="flex flex-col gap-4 px-4">
-                    <h2 className="font-bold">운행정보 </h2>
-                    <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
-                        <header className="mb-4 font-bold">아주대 - 광교중앙역</header>
+            {!modalIsOpen && (
+                <BottomSheet
+                    className="bg-base-100"
+                    open
+                    blocking={false}
+                    expandOnContentDrag
+                    snapPoints={({ maxHeight }) => [maxHeight / 4, maxHeight * 0.6]}
+                >
+                    <div className="flex flex-col gap-4 px-4">
+                        <h2 className="font-bold">운행정보 </h2>
+                        <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
+                            <header className="mb-4 font-bold">아주대 - 광교중앙역</header>
 
-                        <ul className="divide-y pl-4">
-                            <li className="flex flex-row items-center justify-between text-sm">
-                                <div className="font-bold">아주대행</div>
+                            <ul className="divide-y pl-4">
+                                <li className="flex flex-row items-center justify-between text-sm">
+                                    <div className="font-bold">아주대행</div>
 
-                                <div className="flex flex-col text-red-500">
-                                    <div>{queue[0]}</div>
-                                    <div>{queue[1]}</div>
-                                </div>
-                            </li>
+                                    <div className="flex flex-col text-red-500">
+                                        <div>{queue[0]}</div>
+                                        <div>{queue[1]}</div>
+                                    </div>
+                                </li>
 
-                            <li className="flex flex-row items-center justify-between text-sm">
-                                <div className="font-bold">광교중앙역행</div>
+                                <li className="flex flex-row items-center justify-between text-sm">
+                                    <div className="font-bold">광교중앙역행</div>
 
-                                <div className="flex flex-col text-red-500">
-                                    <div>{queue[2]}</div>
-                                    <div>{queue[3]}</div>
-                                </div>
-                            </li>
-                        </ul>
+                                    <div className="flex flex-col text-red-500">
+                                        <div>{queue[2]}</div>
+                                        <div>{queue[3]}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
+                            <header className="mb-4 font-bold">아주대 - 수원역</header>
+
+                            <ul className="divide-y pl-4">
+                                <li className="flex flex-row items-center justify-between text-sm">
+                                    <div className="font-bold">아주대행</div>
+
+                                    <div className="flex flex-col text-red-500">
+                                        <div>{queue[4]}</div>
+                                        <div>{queue[5]}</div>
+                                    </div>
+                                </li>
+
+                                <li className="flex flex-row items-center justify-between text-sm">
+                                    <div className="font-bold">수원역행</div>
+
+                                    <div className="flex flex-col text-red-500">
+                                        <div>{queue[6]}</div>
+                                        <div>{queue[7]}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div className="flex flex-col rounded-2xl bg-white p-5 shadow">
-                        <header className="mb-4 font-bold">아주대 - 수원역</header>
-
-                        <ul className="divide-y pl-4">
-                            <li className="flex flex-row items-center justify-between text-sm">
-                                <div className="font-bold">아주대행</div>
-
-                                <div className="flex flex-col text-red-500">
-                                    <div>{queue[4]}</div>
-                                    <div>{queue[5]}</div>
-                                </div>
-                            </li>
-
-                            <li className="flex flex-row items-center justify-between text-sm">
-                                <div className="font-bold">수원역행</div>
-
-                                <div className="flex flex-col text-red-500">
-                                    <div>{queue[6]}</div>
-                                    <div>{queue[7]}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </BottomSheet>
+                </BottomSheet>
+            )}
             <BottomNav />
         </div>
     );
