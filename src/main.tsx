@@ -28,10 +28,6 @@ const router = createBrowserRouter([
                 path: "/bus",
                 element: <BusPage />,
             },
-            {
-                path: "/bus2",
-                element: <BusPage2 />,
-            },
         ],
     },
     {

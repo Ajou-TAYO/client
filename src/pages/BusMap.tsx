@@ -76,8 +76,6 @@ export default function () {
         };
     }, []);
 
-    console.log(stopPosition);
-
     return (
         <Map
             center={{

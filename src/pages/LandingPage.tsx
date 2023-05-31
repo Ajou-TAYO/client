@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import BottomNav from "../components/BottomNav.tsx";
 
 export default function LandingPage() {
     

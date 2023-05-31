@@ -1,8 +1,16 @@
 import "react-spring-bottom-sheet/dist/style.css";
+import { useState } from 'react';
 
-function BusPage2() {
+// 버스 대여 페이지
+
+const BusPage2 = ({ closeModal }) => {
+    const openPopup = () => {
+        window.open("/bus2", "PopupWindow", "width=100,height=300");
+        closeModal();
+    };
+
     return (
-        <div className="h-screen w-screen">
+        <div className="h-screen/2 w-screen/2">
             <div className="absolute inset-x-0 top-0 z-10 p-2">
                 <div className="navbar bg-primary text-primary-content rounded-box shadow-xl">
                     <div className="flex-none">

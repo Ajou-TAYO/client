@@ -1,15 +1,27 @@
 import { BottomSheet } from "react-spring-bottom-sheet";
 import { useEffect, useState } from "react";
+import ReactModal from "react-modal";
 import "react-spring-bottom-sheet/dist/style.css";
 import axios from "axios";
 import BusMap from "./BusMap";
 import BottomNav from "../components/BottomNav";
+import BusPage2 from "./BusPage2";
 
 function currentTimer() {
     const date = new Date();
     const hours = date.getHours();
     const min = date.getMinutes();
     return hours * 60 + min;
+}
+
+function useInterval(callback: unknown, delay: number) {
+    useEffect(() => {
+        const intervalId = setInterval(callback, delay);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [callback, delay]);
 }
 
 export default function BusPage() {
@@ -20,6 +32,11 @@ export default function BusPage() {
     const toSuwonTime = [910, 1000, 1085];
     const [nowTime, setNow] = useState(currentTimer());
     const [queue, setQueue] = useState(new Array(8).fill(""));
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const setModal = () => {
+        setModalIsOpen(!modalIsOpen);
+    };
 
     function findTimeZone(now: number) { //from g1 g2 to g1 g2 from s1 s2 to s1 s2
         let gf: number;
@@ -96,13 +113,13 @@ export default function BusPage() {
             }
         };
         setQueue(convertQueue(findTimeZone(nowTime)));
-
-        setInterval(() => {
-            setNow(currentTimer());
-            setQueue(convertQueue(findTimeZone(nowTime)));
-        }, 30000);
         getBoard();
     }, []);
+
+    useInterval(() => {
+        setNow(currentTimer());
+        setQueue(convertQueue(findTimeZone(nowTime)));
+    }, 30000);
 
     return (
         <div className="h-screen w-screen">
@@ -147,6 +164,17 @@ export default function BusPage() {
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
+                </div>
+            </div>
+
+            <div className="fixed top-20 right-2 flex justify-center items-center">
+                <div className="rounded-full bg-orange-500 w-12 h-12 flex justify-center items-center">
+                    <button type="button" onClick={setModal}>
+                        <img src="/rent_bus.png" className="w-3/4 h-3/4" style={{transform: 'translate(15%, 0%)'}}/>
+                    </button>
+                    <ReactModal isOpen={modalIsOpen} onRequestClose={setModal} contentLabel="BusPage2 Modal">
+                        {modalIsOpen && <BusPage2 closeModal={setModal} />}
+                    </ReactModal>
                 </div>
             </div>
 
