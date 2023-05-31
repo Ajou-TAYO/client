@@ -44,6 +44,8 @@ export default function AllianceMap() {
     const [Open, setOpen] = useState(new Array(107).fill(false));
     const [filOn, setFilOn] = useState(true);
     const [partnershipDatas, setPartnershipDatas] = useState<any[]>([]);
+    const [list, setList] = useState(true);
+    const [center, setCenter] = useState({ lat: 37.27771738352343, lng: 127.04382834467262 });
 
     useEffect(() => {
         getData()
@@ -66,6 +68,7 @@ export default function AllianceMap() {
         newBottomSheetStates[markerindex] = false;
         setOpen(newBottomSheetStates);
         setFilOn(true);
+        setList(true);
     }
 
     return (
@@ -117,11 +120,7 @@ export default function AllianceMap() {
                 </div>
             ) : null}
 
-            <Map
-                center={{ lat: 37.27771738352343, lng: 127.04382834467262 }}
-                level={3}
-                className="z-0 h-screen w-screen"
-            >
+            <Map center={center} level={3} className="z-0 h-screen w-screen">
                 {filteredPartnershipDatas.map(filteredPartnershipData => (
                     <CustomOverlayMap position={{ lat: filteredPartnershipData.lat, lng: filteredPartnershipData.lng }}>
                         <div
@@ -133,10 +132,36 @@ export default function AllianceMap() {
                                 newBottomSheetStates[filteredPartnershipData.id] = true;
                                 setOpen(newBottomSheetStates);
                                 setFilOn(false);
+                                setList(false);
                             }}
                         />
                     </CustomOverlayMap>
                 ))}
+                <BottomSheet
+                    open={list}
+                    style={{ zIndex: 30 }}
+                    snapPoints={({ maxHeight }) => [maxHeight / 3, maxHeight * 0.7]}
+                    defaultSnap={({ maxHeight }) => maxHeight / 2}
+                    blocking={false}
+                >
+                    {filteredPartnershipDatas.map(filteredPartnershipData => (
+                        <p
+                            onClick={() =>
+                                setCenter({ lat: filteredPartnershipData.lat, lng: filteredPartnershipData.lng })
+                            }
+                        >
+                            <span>{filteredPartnershipData.name} : </span>
+                            <span
+                                className={`rounded-full px-2 ${
+                                    categoryType[filteredPartnershipData.category as TCategoryKey].className
+                                }`}
+                            >
+                                {categoryType[filteredPartnershipData.category].title}
+                            </span>
+                        </p>
+                    ))}
+                    <div className="h-20" />
+                </BottomSheet>
             </Map>
             {partnershipDatas.map(content => (
                 <BottomSheet
@@ -148,7 +173,7 @@ export default function AllianceMap() {
                     snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, maxHeight / 4, maxHeight * 0.6]}
                 >
                     <p className="m-8 text-center text-4xl">{content.name}</p>
-                    <img src={`/${content.id}.jpg`} className="object-contain p-12" alt="해당 점포 이미지" />
+                    <img src={`/${content.id}.jpg`} className="object-contain px-12 py-6" alt="해당 점포 이미지" />
                     <p className="text-center text-2xl">{content.detail}</p>
                 </BottomSheet>
             ))}

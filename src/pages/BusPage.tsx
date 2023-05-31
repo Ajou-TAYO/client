@@ -124,6 +124,7 @@ export default function BusPage() {
 
     return (
         <div className="h-screen w-screen">
+            <BottomNav />
             <BusMap />
             <div className="absolute inset-x-0 top-0 z-10 p-2">
                 <div className="navbar bg-primary text-primary-content rounded-box shadow-xl">
@@ -249,7 +250,6 @@ export default function BusPage() {
                     </div>
                 </BottomSheet>
             )}
-            <BottomNav />
         </div>
     );
 }

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const BottomTab: React.FC = () => {
     return (
-        <div className="btm-nav absolute border-t z-40">
+        <div className="btm-nav absolute border-t z-40 ">
             <NavLink
                 to="/"
                 className={({ isActive, isPending }) => {

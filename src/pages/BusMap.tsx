@@ -38,6 +38,7 @@ export default function () {
     const [busPosition, setBusPosition] = useState<({ x: number; y: number } | null)[]>(new Array(3).fill(null));
     const [isWsOpened, setIsWsOpened] = useState(false);
     const [stopPosition, setStopPosition] = useState<any[]>([]);
+    const [stopToast, setStopToast] = useState(new Array(5).fill(false));
 
     useEffect(() => {
         const rws = new ReconnectingWebSocket("ws://202.30.29.204:8080/bin");
@@ -85,21 +86,62 @@ export default function () {
             level={6}
             className="z-0 h-screen w-screen"
         >
-            {stopPosition.length > 0 && (
-                stopPosition.map(p => (
+            {stopPosition.length > 0 &&
+                stopPosition.map(stop => (
                     <MapMarker
-                        key={`${p.lat}-${p.lng}`} // Use a unique key for each marker to trigger re-rendering
-                        position={{ lat: p.lat, lng: p.lng }}
+                        key={`${stop.lat}-${stop.lng}`} // Use a unique key for each marker to trigger re-rendering
+                        position={{ lat: stop.lat, lng: stop.lng }}
                         image={{
                             src: "/bus_stop.png",
                             size: {
-                                width: 30,
-                                height: 35
-                            }
+                                width: 25,
+                                height: 30,
+                            },
                         }}
-                    />
-                )))
-            }
+                        onClick={() => {
+                            setStopToast(prevToast => {
+                                const updatedToast = [...prevToast];
+                                updatedToast[stop.id - 1] = true;
+                                return updatedToast;
+                            });
+                        }}
+                        onMouseOut={() => {
+                            setStopToast(prevToast => {
+                                const updatedToast = [...prevToast];
+                                updatedToast[stop.id - 1] = false;
+                                return updatedToast;
+                            });
+                        }}
+                    >
+                        {stopToast[stop.id - 1] && (
+                            <div
+                                style={{ padding: "1px", color: "#000", flex: "1 1 0%" }}
+                                onClick={() => {
+                                    setStopToast(prevToast => {
+                                        const updatedToast = [...prevToast];
+                                        updatedToast[stop.id - 1] = false;
+                                        return updatedToast;
+                                    });
+                                }}
+                            >
+                                {stop.name}
+                                <button
+                                    type="button"
+                                    className="border-1 border-black-500 border-solid mx-1"
+                                    onClick={() => {
+                                        setStopToast(prevToast => {
+                                            const updatedToast = [...prevToast];
+                                            updatedToast[stop.id - 1] = false;
+                                            return updatedToast;
+                                        });
+                                    }}
+                                >
+                                    X
+                                </button>
+                            </div>
+                        )}
+                    </MapMarker>
+                ))}
 
             {!isWsOpened && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm">

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "BM Dohyeon";
+    src: url("../assets/BMDOHYEON_otf.otf");
+}
+
 .noticeItem {
     /* 필요한 스타일 추가 */
     /* 예시로 높이와 너비를 지정 */
@@ -7,8 +12,10 @@
 }
 
 .itemTitle {
-    font-family: "Gill Sans MT";
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    border: solid gray 0.5px;
+    padding: 4px 10px 4px 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

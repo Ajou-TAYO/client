@@ -53,21 +53,6 @@ export default function LandingPage() {
             body: "testBody3",
             date: "testDate3",
         },
-        {
-            title: "[학습법] 2023-1학기 학습법 컨설팅 안내 자세히 보기",
-            body: "testBody3",
-            date: "testDate3",
-        },
-        {
-            title: "[연장][교외장학] 2023년 『KT 랜선야학(夜學)』 인천/경기지역 대학생 멘토 선발 안내_6/2(금) 17시까지 자세히 보기",
-            body: "testBody3",
-            date: "testDate3",
-        },
-        {
-            title: "[아주강좌] 제 495회 강연 안내 자세히 보기",
-            body: "testBody3",
-            date: "testDate3",
-        },
     ]);
     const [dateData, setDateData] = useState(["", "2학기 재입학 신청"]);
 
@@ -94,9 +79,10 @@ export default function LandingPage() {
             <div className="flex-1 overflow-scroll p-2">
                 <div className="space-y-4">
                     <div className="notice">
+                        <div className="text-2xl font-bold text-center py-3 text-white bg-purple-700">공지사항</div>
                         <ul>
                             {noticeData.map((item, index) => (
-                                <li key={index} className="noticeItem">
+                                <li key={index} className="bg-white-500">
                                     <div className="itemTitle ">{item.title}</div>
                                 </li>
                             ))}
