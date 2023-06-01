@@ -26,6 +26,10 @@ const router = createBrowserRouter([
                 path: "/bus",
                 element: <BusPage />,
             },
+            {
+                path: "/profile",
+                element: <Profile />,
+            },
         ],
     },
     {
@@ -47,10 +51,6 @@ const router = createBrowserRouter([
     {
         path: "/alliance",
         element: <AllianceMap />,
-    },
-    {
-        path: "/profile",
-        element: <Profile />,
     },
 ]);
 

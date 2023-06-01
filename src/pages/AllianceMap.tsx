@@ -1,4 +1,4 @@
-import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Map } from "react-kakao-maps-sdk";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
 import { useEffect, useMemo, useState } from "react";
@@ -43,7 +43,6 @@ export default function AllianceMap() {
     );
 
     const [Open, setOpen] = useState(new Array(107).fill(false));
-    const [filOn, setFilOn] = useState(true);
     const [partnershipDatas, setPartnershipDatas] = useState<any[]>([]);
     const [list, setList] = useState(true);
     const [center, setCenter] = useState({ lat: 37.27771738352343, lng: 127.04382834467262 });
@@ -68,7 +67,6 @@ export default function AllianceMap() {
         const newBottomSheetStates = [...Open];
         newBottomSheetStates[markerindex] = false;
         setOpen(newBottomSheetStates);
-        setFilOn(true);
         setList(true);
     }
 
@@ -111,7 +109,6 @@ export default function AllianceMap() {
                                 const newBottomSheetStates = [...Open];
                                 newBottomSheetStates[filteredPartnershipData.id] = true;
                                 setOpen(newBottomSheetStates);
-                                setFilOn(false);
                                 setList(false);
                             }}
                         />
@@ -158,7 +155,7 @@ export default function AllianceMap() {
                                                 categoryType[filteredPartnershipData.category as TCategoryKey].className
                                             }`}
                                         >
-                                            {categoryType[filteredPartnershipData.category].title}
+                                            {categoryType[filteredPartnershipData.category as TCategoryKey].title}
                                         </span>
                                     </div>
                                 </div>
@@ -179,7 +176,11 @@ export default function AllianceMap() {
                     snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, maxHeight / 4, maxHeight * 0.6]}
                 >
                     <p className="m-8 text-center text-3xl font-bold">{content.name}</p>
-                    <img src={`/img/alliance/${content.id}.jpg`} className="object-contain px-12 py-6" alt="해당 점포 이미지" />
+                    <img
+                        src={`/img/alliance/${content.id}.jpg`}
+                        className="object-contain px-12 py-6"
+                        alt="해당 점포 이미지"
+                    />
                     <p className="text-center text-2xl">{content.detail}</p>
                 </BottomSheet>
             ))}

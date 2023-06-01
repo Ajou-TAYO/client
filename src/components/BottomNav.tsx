@@ -4,7 +4,7 @@ import { BiBus, BiHome, BiUser } from "react-icons/bi";
 
 const BottomTab: React.FC = () => {
     return (
-        <div className="btm-nav absolute z-40 border-t ">
+        <div className="btm-nav absolute z-100 border-t ">
             <NavLink
                 to="/"
                 className={({ isActive, isPending }) => {
