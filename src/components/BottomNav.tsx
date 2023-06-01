@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const BottomTab: React.FC = () => {
     return (
-        <div className="btm-nav absolute border-t">
+        <div className="btm-nav absolute border-t z-40 ">
             <NavLink
                 to="/"
                 className={({ isActive, isPending }) => {
@@ -44,7 +44,7 @@ const BottomTab: React.FC = () => {
 
             <NavLink
                 end
-                to="/bus2"
+                to="/ajoumap"
                 className={({ isActive, isPending }) => {
                     const classNames = ["text-primary"];
                     if (isPending) classNames.push("pending");

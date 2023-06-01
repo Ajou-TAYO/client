@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { Map, Polyline, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { useEffect, useState } from "react";
+import { Map, CustomOverlayMap, MapMarker } from "react-kakao-maps-sdk";
 import ReconnectingWebSocket from "reconnecting-websocket";
+import axios from "axios";
 
 function BusOverlay({ position }: { position: { x: number; y: number } | null }) {
     if (!position) return null;
@@ -26,13 +27,29 @@ function BusOverlay({ position }: { position: { x: number; y: number } | null })
     );
 }
 
+async function getStopData() {
+    // Fetch data from an API or any other source
+    const response = await axios.get("http://202.30.29.204:8080/bus/location/stops", {});
+    // console.log(response.data.data);
+    return response.data.data;
+}
+
 export default function () {
     const [busPosition, setBusPosition] = useState<({ x: number; y: number } | null)[]>(new Array(3).fill(null));
-
     const [isWsOpened, setIsWsOpened] = useState(false);
+    const [stopPosition, setStopPosition] = useState<any[]>([]);
+    const [stopToast, setStopToast] = useState(new Array(5).fill(false));
 
     useEffect(() => {
         const rws = new ReconnectingWebSocket("ws://202.30.29.204:8080/bin");
+
+        getStopData()
+            .then(pos => {
+                setStopPosition(pos);
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
         rws.onopen = () => {
             setIsWsOpened(true);
@@ -69,6 +86,63 @@ export default function () {
             level={6}
             className="z-0 h-screen w-screen"
         >
+            {stopPosition.length > 0 &&
+                stopPosition.map(stop => (
+                    <MapMarker
+                        key={`${stop.lat}-${stop.lng}`} // Use a unique key for each marker to trigger re-rendering
+                        position={{ lat: stop.lat, lng: stop.lng }}
+                        image={{
+                            src: "/bus_stop.png",
+                            size: {
+                                width: 25,
+                                height: 30,
+                            },
+                        }}
+                        onClick={() => {
+                            setStopToast(prevToast => {
+                                const updatedToast = [...prevToast];
+                                updatedToast[stop.id - 1] = true;
+                                return updatedToast;
+                            });
+                        }}
+                        onMouseOut={() => {
+                            setStopToast(prevToast => {
+                                const updatedToast = [...prevToast];
+                                updatedToast[stop.id - 1] = false;
+                                return updatedToast;
+                            });
+                        }}
+                    >
+                        {stopToast[stop.id - 1] && (
+                            <div
+                                style={{ padding: "1px", color: "#000", flex: "1 1 0%" }}
+                                onClick={() => {
+                                    setStopToast(prevToast => {
+                                        const updatedToast = [...prevToast];
+                                        updatedToast[stop.id - 1] = false;
+                                        return updatedToast;
+                                    });
+                                }}
+                            >
+                                {stop.name}
+                                <button
+                                    type="button"
+                                    className="border-1 border-black-500 border-solid mx-1"
+                                    onClick={() => {
+                                        setStopToast(prevToast => {
+                                            const updatedToast = [...prevToast];
+                                            updatedToast[stop.id - 1] = false;
+                                            return updatedToast;
+                                        });
+                                    }}
+                                >
+                                    X
+                                </button>
+                            </div>
+                        )}
+                    </MapMarker>
+                ))}
+
             {!isWsOpened && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm">
                     <div className="flex flex-col items-center">
