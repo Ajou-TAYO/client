@@ -14,7 +14,7 @@ async function getData() {
 
 const categoryType = {
     CAFE: {
-        title: "카페 / 디저트",
+        title: "카페",
         className: "bg-red-500",
     },
     RESTAURANT: {
@@ -124,10 +124,12 @@ export default function AllianceMap() {
                     defaultSnap={({ maxHeight }) => maxHeight / 2}
                     blocking={false}
                 >
-                    <div className="flex flex-row gap-2 my-2">
+                    <div className="my-2 flex flex-row gap-2">
                         {categoryKeys.map(categoryKey => (
                             <button
-                                className={`flex flex-row p-1 rounded-full border-2 ${categoryFilterStatus[categoryKey] ? "bg-base-100" : "bg-base-300"} `}
+                                className={`flex flex-row rounded-full border-2 p-1 ${
+                                    categoryFilterStatus[categoryKey] ? "bg-base-100" : "bg-base-300"
+                                } `}
                                 onClick={() => {
                                     setCategoryFilterStatus(prev => ({
                                         ...prev,
@@ -145,22 +147,25 @@ export default function AllianceMap() {
                         ))}
                     </div>
 
-                    {filteredPartnershipDatas.map(filteredPartnershipData => (
-                        <p
-                            onClick={() =>
-                                setCenter({ lat: filteredPartnershipData.lat, lng: filteredPartnershipData.lng })
-                            }
-                        >
-                            <span>{filteredPartnershipData.name} : </span>
-                            <span
-                                className={`rounded-full px-2 ${
-                                    categoryType[filteredPartnershipData.category as TCategoryKey].className
-                                }`}
-                            >
-                                {categoryType[filteredPartnershipData.category].title}
-                            </span>
-                        </p>
-                    ))}
+                    <div id="partnershipContainer" className="flex flex-col gap-4 px-4">
+                        {filteredPartnershipDatas.map(filteredPartnershipData => (
+                            <div className="card bg-base-100 shadow-xl">
+                                <div className="card-body">
+                                    <h2 className="card-title">{filteredPartnershipData.name}</h2>
+                                    <div>
+                                        <span
+                                            className={`rounded-full px-2 ${
+                                                categoryType[filteredPartnershipData.category as TCategoryKey].className
+                                            }`}
+                                        >
+                                            {categoryType[filteredPartnershipData.category].title}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
                     <div className="h-20" />
                 </BottomSheet>
             </Map>
@@ -173,7 +178,7 @@ export default function AllianceMap() {
                     defaultSnap={({ maxHeight }) => maxHeight / 4}
                     snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, maxHeight / 4, maxHeight * 0.6]}
                 >
-                    <p className="m-8 text-center text-4xl">{content.name}</p>
+                    <p className="m-8 text-center text-3xl font-bold">{content.name}</p>
                     <img src={`/${content.id}.jpg`} className="object-contain px-12 py-6" alt="해당 점포 이미지" />
                     <p className="text-center text-2xl">{content.detail}</p>
                 </BottomSheet>
