@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./land.css";
@@ -54,7 +54,13 @@ export default function LandingPage() {
             date: "testDate3",
         },
     ]);
-    const [dateData, setDateData] = useState(["", "2학기 재입학 신청"]);
+
+    let vh = 0;
+
+    useEffect(() => {
+        vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }, []);
 
     return (
         <div className="flex h-screen w-screen flex-col">

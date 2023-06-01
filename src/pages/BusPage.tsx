@@ -6,6 +6,7 @@ import axios from "axios";
 import BusMap from "./BusMap";
 import BottomNav from "../components/BottomNav";
 import BusPage2 from "./BusPage2";
+import "./land.css";
 
 function currentTimer() {
     const date = new Date();

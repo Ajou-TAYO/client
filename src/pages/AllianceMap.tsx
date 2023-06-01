@@ -4,6 +4,7 @@ import "react-spring-bottom-sheet/dist/style.css";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BottomNav from "../components/BottomNav";
+import "./land.css";
 
 async function getData() {
     // Fetch data from an API or any other source

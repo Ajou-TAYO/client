@@ -3,6 +3,18 @@
     src: url("../assets/BMDOHYEON_otf.otf");
 }
 
+:root {
+    --vh: 100%;
+}
+
+html,
+body {
+    /*height: calc(var(--vh, 1vh) * 100);*/
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: fill-available;
+}
+
 .noticeItem {
     /* 필요한 스타일 추가 */
     /* 예시로 높이와 너비를 지정 */
