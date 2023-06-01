@@ -179,7 +179,7 @@ export default function AllianceMap() {
                     snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, maxHeight / 4, maxHeight * 0.6]}
                 >
                     <p className="m-8 text-center text-3xl font-bold">{content.name}</p>
-                    <img src={`/${content.id}.jpg`} className="object-contain px-12 py-6" alt="해당 점포 이미지" />
+                    <img src={`/img/alliance/${content.id}.jpg`} className="object-contain px-12 py-6" alt="해당 점포 이미지" />
                     <p className="text-center text-2xl">{content.detail}</p>
                 </BottomSheet>
             ))}
