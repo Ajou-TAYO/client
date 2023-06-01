@@ -100,27 +100,6 @@ export default function AllianceMap() {
                 </div>
             </div>
 
-            {filOn ? (
-                <div className="fixed left-5 top-24 z-10 box-border flex flex-col border-2 border-indigo-400 bg-slate-100">
-                    {categoryKeys.map(categoryKey => (
-                        <button
-                            className="flex flex-row p-1"
-                            onClick={() => {
-                                setCategoryFilterStatus(prev => ({
-                                    ...prev,
-                                    [categoryKey]: !prev[categoryKey],
-                                }));
-                            }}
-                        >
-                            <div className={`mx-2 mt-1 h-4 w-4 rounded-full ${categoryType[categoryKey].className}`} />
-                            <p className={`mr-2 ${categoryFilterStatus[categoryKey] ? "font-bold" : ""}`}>
-                                {categoryType[categoryKey].title}
-                            </p>
-                        </button>
-                    ))}
-                </div>
-            ) : null}
-
             <Map center={center} level={3} className="z-0 h-screen w-screen">
                 {filteredPartnershipDatas.map(filteredPartnershipData => (
                     <CustomOverlayMap position={{ lat: filteredPartnershipData.lat, lng: filteredPartnershipData.lng }}>
@@ -145,6 +124,27 @@ export default function AllianceMap() {
                     defaultSnap={({ maxHeight }) => maxHeight / 2}
                     blocking={false}
                 >
+                    <div className="flex flex-row gap-2 my-2">
+                        {categoryKeys.map(categoryKey => (
+                            <button
+                                className={`flex flex-row p-1 rounded-full border-2 ${categoryFilterStatus[categoryKey] ? "bg-base-100" : "bg-base-300"} `}
+                                onClick={() => {
+                                    setCategoryFilterStatus(prev => ({
+                                        ...prev,
+                                        [categoryKey]: !prev[categoryKey],
+                                    }));
+                                }}
+                            >
+                                <div
+                                    className={`mx-2 mt-1 h-4 w-4 rounded-full ${categoryType[categoryKey].className}`}
+                                />
+                                <p className={`mr-2 ${categoryFilterStatus[categoryKey] ? "font-bold" : ""}`}>
+                                    {categoryType[categoryKey].title}
+                                </p>
+                            </button>
+                        ))}
+                    </div>
+
                     {filteredPartnershipDatas.map(filteredPartnershipData => (
                         <p
                             onClick={() =>
