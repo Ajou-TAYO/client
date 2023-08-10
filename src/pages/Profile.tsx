@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Fragment, useState } from "react";
 import axios from "axios";
 import BottomNav from "../components/BottomNav";
@@ -11,48 +12,33 @@ function Profile() {
 
     return (
         <div className="h-screen w-screen">
-            <div className="absolute inset-x-0 top-0 z-10 p-2">
-                <div className="navbar bg-primary text-primary-content rounded-box shadow-xl">
-                    <div className="flex-none">
-                        <button className="btn btn-square btn-ghost">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                className="inline-block h-5 w-5 stroke-current"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            </svg>
-                        </button>
+            {/* Navbar */}
+            <nav className="inset-x-0 top-0">
+                <div className="navbar bg-[#4E5FFF] shadow-xl">
+                    <div className="flex-1 justify-center">
+                        <a className="px-3 text-2xl font-bold normal-case text-white">Ajou-life</a>
                     </div>
-                    <div className="flex-1">
-                        <a className="text-xl font-bold normal-case">Ajou Life</a>
-                    </div>
-                    <div className="flex-none" />
                 </div>
-            </div>
+            </nav>
 
-            <div className="absolute inset-x-0 top-20 z-10 flex flex-col items-center">
-                <div className="w-24 rounded-full pt-8">
-                    <img src="https://www.w3schools.com/howto/img_avatar.png" />
-                </div>
-                <div className="py-3 text-xl font-bold">김나영</div>
-                <div className="pb-12 font-semibold">버스의 신</div>
+            <div className="absolute inset-x-0 top-20 z-10">
+                <div className="p-3 pb-5 text-2xl font-bold">nickname 님, 반갑습니다.</div>
                 <div>
-                    <div className="bg-indigo-500 py-3 pl-3 text-lg font-semibold text-white">계정</div>
                     <div className="border-t-2" />
-                    <button className="w-full border-b-2 py-2 pl-3 text-left">content 1</button>
-                    <button className="w-full border-b-2 py-2 pl-3 text-left">content 1</button>
-                    <button className="w-full border-b-2 py-2 pl-3 text-left">content 1</button>
-                    <button className="w-full border-b-2 py-2 pl-3 text-left">content 1</button>
-                    <button className="w-full border-b-2 py-2 pl-3 text-left">content 1</button>
-                    <button className="w-full border-b-2 py-2 pl-3 text-left">content 1</button>
-                    <button className="w-full border-b-2 py-2 pl-3 text-left">content 1</button>
+                    <Link to="/nickname/reset">
+                        <button className="w-full border-b-2 py-4 pl-3 text-left font-semibold">닉네임 변경</button>
+                    </Link>
+                    <Link to="/password/reset">
+                        <button className="w-full border-b-2 py-4 pl-3 text-left font-semibold">비밀번호 변경</button>
+                    </Link>
+                    
+                    <button className="w-full border-b-2 py-4 pl-3 text-left font-semibold">백그라운드 알림 설정</button>
+                    <Link to="/policy">
+                        <button className="w-full border-b-2 py-4 pl-3 text-left font-semibold">개인정보 처리 방침</button>
+                    </Link>
+                    
+                    <button className="w-full border-b-2 py-4 pl-3 text-left font-semibold">로그아웃</button>
+                    <button className="w-full border-b-2 py-4 pl-3 text-left font-semibold">회원탈퇴</button>
                 </div>
             </div>
         </div>

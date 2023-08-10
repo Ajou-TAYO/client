@@ -11,6 +11,9 @@ import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPw";
 import AllianceMap from "./pages/AllianceMap";
 import Profile from "./pages/Profile";
+import ChangeNick from "./pages/ChangeNick";
+import ChangePw from "./pages/ChangePw";
+import Policy from "./pages/Policy";
 import Layout from "./components/Layout";
 
 const router = createBrowserRouter([
@@ -52,6 +55,18 @@ const router = createBrowserRouter([
         path: "/alliance",
         element: <AllianceMap />,
     },
+    {
+        path: "/nickname/reset",
+        element: <ChangeNick />,
+    },
+    {
+        path: "/password/reset",
+        element: <ChangePw />,
+    },
+    {
+        path: "/policy",
+        element: <Policy />,
+    }
 ]);
 
 const queryClient = new QueryClient();

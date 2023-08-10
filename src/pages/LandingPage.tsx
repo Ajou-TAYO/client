@@ -65,42 +65,24 @@ export default function LandingPage() {
     return (
         <div className="flex h-screen w-screen flex-col">
             {/* Navbar */}
-            <nav className="inset-x-0 top-0 p-2">
-                <div className="navbar bg-base-100 rounded-box shadow-xl">
-                    <div className="flex-1 justify-between">
-                        <a className="px-3 text-xl font-bold normal-case">Ajou Life</a>
-                        <div>
-                            <Link className="object-right px-1 text-sm font-bold text-blue-400" to="/login">
-                                로그인
-                            </Link>
-                            <Link className="object-right px-1 text-sm font-bold text-blue-400" to="/presignup">
-                                회원가입
-                            </Link>
-                        </div>
+            <nav className="inset-x-0 top-0">
+                <div className="navbar bg-[#4E5FFF] shadow-xl">
+                    <div className="flex-1 justify-center">
+                        <a className="px-3 text-2xl font-bold normal-case text-white">Ajou-life</a>
                     </div>
                 </div>
             </nav>
 
             {/* Content */}
-            <div className="flex-1 overflow-scroll p-2">
-                <div className="space-y-4">
-                    <div className="notice">
-                        <div className="text-2xl font-bold text-center py-3 text-white bg-purple-700">공지사항</div>
-                        <ul>
-                            {noticeData.map((item, index) => (
-                                <li key={index} className="bg-white-500">
-                                    <div className="itemTitle ">{item.title}</div>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div>
-                        <div className="my-6 border border-gray-200 bg-gray-200 p-4">
-                            <div className="">
-                                <Calendar onChange={onChange} value={value} />
-                            </div>
-                        </div>
-                    </div>
+            <div className="w-full border-[#B1D5FF] border-b-2 justify-center flex-column">
+                <img src="/main.png"
+                    className="absolute opacity-30 bg-origin-border"/>
+                <div className="w-full mb-10">
+                <div className="p-3 font-bold text-xl">Title</div>
+                <div className="p-3">여기에 팀소개 프로젝트 소개 들어가나용</div>
+                </div>
+                <div className="w-full justify-center flex pb-5">
+                <div className="w-4/5 h-40 bg-[#4E5FFF]"></div>
                 </div>
             </div>
         </div>
