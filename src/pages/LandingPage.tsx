@@ -74,16 +74,15 @@ export default function LandingPage() {
             </nav>
 
             {/* Content */}
-            <div className="w-full border-[#B1D5FF] border-b-2 justify-center flex-column">
-                <img src="/main.png"
-                    className="absolute opacity-30 bg-origin-border"/>
-                <div className="w-full mb-10">
-                <div className="p-3 font-bold text-xl">Title</div>
-                <div className="p-3">여기에 팀소개 프로젝트 소개 들어가나용</div>
-                </div>
-                <div className="w-full justify-center flex pb-5">
-                <div className="w-4/5 h-40 bg-[#4E5FFF]"></div>
-                </div>
+            <div className="w-full h-100 flex flex-col justify-center items-center">
+                <div className="w-full h-72 opacity-50 bg-[url('/main.png')] bg-cover bg-no-repeat"></div>
+                <div className="w-4/5 h-32 bg-[#4E5FFF]"></div>
+            </div>
+            <div className="w-full h-40 mt-3 border-[#B1D5FF] border-t-2 border-b-2"></div>
+            <div className="w-7/8 h-40 flex justify-between items-center m-3">
+                <button className="w-1/4 h-20 border-[#4E5FFF] border-2 rounded-full"></button>
+                <button className="w-1/4 h-20 border-[#4E5FFF] border-2 rounded-full"></button>
+                <button className="w-1/4 h-20 border-[#4E5FFF] border-2 rounded-full"></button>
             </div>
         </div>
     );
