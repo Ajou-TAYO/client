@@ -1,6 +1,6 @@
 // SignUp.tsx
 import { Link } from "react-router-dom";
-import { useState, setState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function SignUp() {
@@ -15,7 +15,7 @@ function SignUp() {
         console.log(id, num, password);
         return axios
             .post(
-                "http://202.30.29.204:8080/members/signup/",
+                "http://127.0.0.1:8080/members/signup/",
                 {
                     email: id,
                     verificationCode: num,
@@ -38,7 +38,7 @@ function SignUp() {
     function postEmailCert() {
         return axios
             .post(
-                "http://202.30.29.204:8080/members/signup/email",
+                "http://127.0.0.1:8080/members/signup/email",
                 {
                     email: id,
                 },
@@ -46,7 +46,7 @@ function SignUp() {
             )
             .then(response => {
                 return axios
-                    .post("http://202.30.29.204:8080/members/signup/email/request", {
+                    .post("http://127.0.0.1:8080/members/signup/email/request", {
                         email: id,
                     })
                     .then(response => {
@@ -72,7 +72,7 @@ function SignUp() {
         e.preventDefault();
     };
 
-    const validatePassword = password => {
+    const validatePassword = (password: string) => {
         console.log("test : ", password);
         if (password.length <= 8) {
             setIsValid(false);
@@ -85,14 +85,15 @@ function SignUp() {
         }
     };
 
-    const passwordChange = event => {
+    const passwordChange = (event: any) => {
+        console.log(event);
         const pwvalue = event.target.value;
         setPassword(pwvalue);
         console.log("password : ", pwvalue);
         validatePassword(pwvalue);
     };
 
-    const checkPassword = passwordCheck => {
+    const checkPassword = (passwordCheck: string) => {
         console.log("check : ", passwordCheck);
         console.log("check2 : ", password);
         if (passwordCheck.length == 0) {
@@ -125,7 +126,9 @@ function SignUp() {
                                             value={id}
                                             onChange={event => setId(event.target.value)}
                                         />
-                                        <button className="btn" onClick={postEmailCert}>인증</button>
+                                        <button className="btn" onClick={postEmailCert}>
+                                            인증
+                                        </button>
                                     </label>
 
                                     <label className="label">
@@ -203,11 +206,7 @@ function SignUp() {
                                     </div>
                                 </div>
                                 <div className="mb-5 align-top">
-                                    <button
-                                        type="submit"
-                                        onClick={postSignUpData}
-                                        className="btn w-full"
-                                    >
+                                    <button type="submit" onClick={postSignUpData} className="btn w-full">
                                         가입
                                     </button>
                                 </div>

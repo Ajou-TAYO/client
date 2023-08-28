@@ -9,7 +9,7 @@ export default function FindPw() {
         console.log(idForFind);
         return axios
             .post(
-                "http://202.30.29.204:8080/members/password/find",
+                "http://127.0.0.1:8080/members/password/find",
                 {
                     email: idForFind,
                 },
@@ -24,7 +24,7 @@ export default function FindPw() {
             });
     }
 
-    const SubmitForm = (e) => {
+    const SubmitForm = (e: any) => {
         e.preventDefault();
     };
 
@@ -62,9 +62,7 @@ export default function FindPw() {
                                 </div>
                                 <Link to="/password/find">
                                     <div className="mb-5 align-top">
-                                        <button
-                                            className="h-9 w-full rounded-sm text-xs font-bold text-blue-500 underline"
-                                        >
+                                        <button className="h-9 w-full rounded-sm text-xs font-bold text-blue-500 underline">
                                             비밀번호 재설정
                                         </button>
                                     </div>

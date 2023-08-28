@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import TopBar from "../components/TopBar";
 
 function ChangeNick() {
     const navigate = useNavigate();
@@ -11,16 +12,16 @@ function ChangeNick() {
         console.log(nickname);
         return axios
             .post(
-                "http://202.30.29.204:8080/nickname/reset",
+                "http://127.0.0.1:8080/my/nickname/reset",
                 {
                     // originalNickname : ,
-                    newNickname : nickname,
+                    newNickname: nickname,
                 },
                 { withCredentials: true },
             )
             .then(response => {
                 console.log(response.data);
-                alert("닉네임이 변경되었습니다. Profile 창에서 변경된 닉네임을 확인할 수 있습니다.")
+                alert("닉네임이 변경되었습니다. Profile 창에서 변경된 닉네임을 확인할 수 있습니다.");
                 navigate("/profile");
                 // 닉네임 변경 성공 처리
             })
@@ -32,27 +33,22 @@ function ChangeNick() {
 
     return (
         <div className="h-screen w-screen">
-            {/* Navbar */}
-            <nav className="inset-x-0 top-0">
-                <div className="navbar bg-[#4E5FFF] shadow-xl">
-                    <div className="flex-1 justify-center">
-                        <a className="px-3 text-2xl font-bold normal-case text-white">Ajou-life</a>
-                    </div>
-                </div>
-            </nav>
+            <TopBar />
 
             <div className="flex h-full w-full flex-col items-center my-12">
                 <p className="pb-10 text-center text-xl font-bold">닉네임 변경</p>
                 <div className="w-full p-8 flex flex-col gap-4 max-w-xl mx-auto">
                     <div className="form-control mb-7">
                         <input
-                        type="text"
-                        placeholder="닉네임"
-                        className="input input-bordered w-full"
-                        onChange={event => setNn(event.target.value)}
-                        value={nickname}
+                            type="text"
+                            placeholder="닉네임"
+                            className="input input-bordered w-full"
+                            onChange={event => setNn(event.target.value)}
+                            value={nickname}
                         />
-                        <p className="text-sm pt-3">한글 및 영문, 숫자, 일부 특수문자 (-,_,.)만 사용 가능하며, 최대 15자까지만 등록 가능합니다.</p>
+                        <p className="text-sm pt-3">
+                            한글 및 영문, 숫자, 일부 특수문자 (-,_,.)만 사용 가능하며, 최대 15자까지만 등록 가능합니다.
+                        </p>
                     </div>
 
                     <div className="align-top">
@@ -68,7 +64,6 @@ function ChangeNick() {
                 </div>
             </div>
         </div>
-        
     );
 }
 

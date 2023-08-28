@@ -104,10 +104,10 @@ export default function AllianceMap() {
                     defaultSnap={({ maxHeight }) => maxHeight / 2}
                     blocking={false}
                 >
-                    <div className="my-2 flex flex-row gap-2">
+                    <div className="px-2 my-2 flex flex-row gap-2 justify-around">
                         {categoryKeys.map(categoryKey => (
                             <button
-                                className={`flex flex-row rounded-full border-2 p-1 ${
+                                className={`flex flex-row rounded-full border-2 p-1 w-fit h-8 ${
                                     categoryFilterStatus[categoryKey] ? "bg-base-100" : "bg-base-300"
                                 } `}
                                 onClick={() => {
@@ -118,11 +118,15 @@ export default function AllianceMap() {
                                 }}
                             >
                                 <div
-                                    className={`mx-2 my-auto h-5 w-5 rounded-full ${categoryType[categoryKey].className} items-center justify-center flex`}
+                                    className={`mx-1 my-auto h-5 w-5 rounded-full ${categoryType[categoryKey].className} items-center justify-center flex`}
                                 >
                                     {categoryType[categoryKey].icon}
                                 </div>
-                                <p className={`mr-2 ${categoryFilterStatus[categoryKey] ? "font-bold" : ""}`}>
+                                <p
+                                    className={`mr-1 md:text-base text-sm ${
+                                        categoryFilterStatus[categoryKey] ? "font-bold" : ""
+                                    }`}
+                                >
                                     {categoryType[categoryKey].title}
                                 </p>
                             </button>

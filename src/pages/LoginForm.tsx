@@ -3,7 +3,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import SignUp from "./pages/SignUp";
 
 function LoginForm() {
     const navigate = useNavigate();
@@ -15,7 +14,7 @@ function LoginForm() {
         console.log(id, password);
         return axios
             .post(
-                "http://202.30.29.204:8080/members/login",
+                "http://127.0.0.1:8080/members/login",
                 {
                     email: id,
                     password,
@@ -43,11 +42,11 @@ function LoginForm() {
                         <span className="label-text">이메일</span>
                     </label>
                     <input
-                      type="text"
-                      placeholder="@ajou.ac.kr"
-                      className="input input-bordered w-full"
-                      onChange={event => setId(event.target.value)}
-                      value={id}
+                        type="text"
+                        placeholder="@ajou.ac.kr"
+                        className="input input-bordered w-full"
+                        onChange={event => setId(event.target.value)}
+                        value={id}
                     />
                 </div>
 
@@ -56,10 +55,10 @@ function LoginForm() {
                         <span className="label-text">비밀번호</span>
                     </label>
                     <input
-                      type="password"
-                      className="input input-bordered w-full"
-                      onChange={event => setPassword(event.target.value)}
-                      value={password}
+                        type="password"
+                        className="input input-bordered w-full"
+                        onChange={event => setPassword(event.target.value)}
+                        value={password}
                     />
                 </div>
 
@@ -70,14 +69,10 @@ function LoginForm() {
                 </div>
                 <div className="flex w-full justify-evenly">
                     <Link to="/presignup">
-                            <span className="h-7 rounded-sm text-xs font-bold text-blue-500 underline">
-                                회원가입 하기
-                            </span>
+                        <span className="h-7 rounded-sm text-xs font-bold text-blue-500 underline">회원가입 하기</span>
                     </Link>
                     <Link to="/password/find">
-                            <span className="h-7 text-xs font-bold text-blue-500 underline">
-                                비밀번호 찾기
-                            </span>
+                        <span className="h-7 text-xs font-bold text-blue-500 underline">비밀번호 찾기</span>
                     </Link>
                 </div>
             </div>
