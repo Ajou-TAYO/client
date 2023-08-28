@@ -55,7 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-calendar", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.2.1"],\
             ["react-dom", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:18.2.0"],\
-            ["react-icons", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.9.0"],\
+            ["react-icons", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.10.1"],\
             ["react-kakao-maps-sdk", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:1.1.8"],\
             ["react-modal", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:3.16.1"],\
             ["react-router-dom", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:6.10.0"],\
@@ -102,7 +102,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-calendar", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.2.1"],\
             ["react-dom", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:18.2.0"],\
-            ["react-icons", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.9.0"],\
+            ["react-icons", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.10.1"],\
             ["react-kakao-maps-sdk", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:1.1.8"],\
             ["react-modal", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:3.16.1"],\
             ["react-router-dom", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:6.10.0"],\
@@ -8142,17 +8142,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["react-icons", [\
-        ["npm:4.9.0", {\
-          "packageLocation": "./.yarn/cache/react-icons-npm-4.9.0-633c387145-69d1000d02.zip/node_modules/react-icons/",\
+        ["npm:4.10.1", {\
+          "packageLocation": "./.yarn/cache/react-icons-npm-4.10.1-74abe904b6-b6c8d4fe48.zip/node_modules/react-icons/",\
           "packageDependencies": [\
-            ["react-icons", "npm:4.9.0"]\
+            ["react-icons", "npm:4.10.1"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.9.0", {\
-          "packageLocation": "./.yarn/__virtual__/react-icons-virtual-ae67b66346/0/cache/react-icons-npm-4.9.0-633c387145-69d1000d02.zip/node_modules/react-icons/",\
+        ["virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.10.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-icons-virtual-2dd297bad2/0/cache/react-icons-npm-4.10.1-74abe904b6-b6c8d4fe48.zip/node_modules/react-icons/",\
           "packageDependencies": [\
-            ["react-icons", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.9.0"],\
+            ["react-icons", "virtual:0f39b14e451370f8333784a199454c8c43994fb02829caefd072ceae170e58ecfeef699476661fdb1dc8871ee05837988f8d8483dfb1e8d22959237428e545df#npm:4.10.1"],\
             ["@types/react", "npm:18.0.35"],\
             ["react", "npm:18.2.0"]\
           ],\

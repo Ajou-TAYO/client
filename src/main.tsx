@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import BusPage from "./pages/BusPage";
+import BusPage from "./pages/BusOverlay";
 import LandingPage from "./pages/LandingPage";
 import LoginForm from "./pages/LoginForm";
 import PreSignUp from "./pages/PreSignUp";
@@ -15,6 +15,7 @@ import ChangeNick from "./pages/ChangeNick";
 import ChangePw from "./pages/ChangePw";
 import Policy from "./pages/Policy";
 import Layout from "./components/Layout";
+import BusBoardDetail from "./pages/BusBoardDetail";
 
 const router = createBrowserRouter([
     {
@@ -66,7 +67,11 @@ const router = createBrowserRouter([
     {
         path: "/policy",
         element: <Policy />,
-    }
+    },
+    {
+        path: "/busboarddetail",
+        element: <BusBoardDetail />,
+    },
 ]);
 
 const queryClient = new QueryClient();

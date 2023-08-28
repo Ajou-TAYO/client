@@ -5,10 +5,13 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BottomNav from "../components/BottomNav";
 import "./land.css";
+import TopBar from "../components/TopBar";
+import { BiCoffee, BiDrink } from "react-icons/bi";
+import { PiBowlFood, PiGuitar } from "react-icons/pi";
 
 async function getData() {
     // Fetch data from an API or any other source
-    const response = await axios.get("http://202.30.29.204:8080/partnerships", {});
+    const response = await axios.get("http://127.0.0.1:8080/partnerships", {});
     return response.data.data;
 }
 
@@ -16,18 +19,22 @@ const categoryType = {
     CAFE: {
         title: "카페",
         className: "bg-red-500",
+        icon: <BiCoffee />,
     },
     RESTAURANT: {
         title: "식당",
         className: "bg-blue-500",
+        icon: <PiBowlFood />,
     },
     PUB: {
         title: "주점",
         className: "bg-green-500",
+        icon: <BiDrink />,
     },
     ETC: {
         title: "기타",
         className: "bg-yellow-500",
+        icon: <PiGuitar />,
     },
 };
 
@@ -63,7 +70,7 @@ export default function AllianceMap() {
         );
     }, [partnershipDatas, categoryFilterStatus]);
 
-    function onDismiss(markerindex) {
+    function onDismiss(markerindex: number) {
         const newBottomSheetStates = [...Open];
         newBottomSheetStates[markerindex] = false;
         setOpen(newBottomSheetStates);
@@ -72,31 +79,7 @@ export default function AllianceMap() {
 
     return (
         <div className="h-screen w-screen">
-            <div className="absolute inset-x-0 top-0 z-10 p-2">
-                <div className="navbar bg-primary text-primary-content rounded-box shadow-xl">
-                    <div className="flex-none">
-                        <button className="btn btn-square btn-ghost">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                className="inline-block h-5 w-5 stroke-current"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                    <div className="flex-1">
-                        <a className="text-xl font-bold normal-case">Ajou Life</a>
-                    </div>
-                    <div className="flex-none" />
-                </div>
-            </div>
+            <TopBar />
 
             <Map center={center} level={3} className="z-0 h-screen w-screen">
                 {filteredPartnershipDatas.map(filteredPartnershipData => (
@@ -135,8 +118,10 @@ export default function AllianceMap() {
                                 }}
                             >
                                 <div
-                                    className={`mx-2 mt-1 h-4 w-4 rounded-full ${categoryType[categoryKey].className}`}
-                                />
+                                    className={`mx-2 my-auto h-5 w-5 rounded-full ${categoryType[categoryKey].className} items-center justify-center flex`}
+                                >
+                                    {categoryType[categoryKey].icon}
+                                </div>
                                 <p className={`mr-2 ${categoryFilterStatus[categoryKey] ? "font-bold" : ""}`}>
                                     {categoryType[categoryKey].title}
                                 </p>
