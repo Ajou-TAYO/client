@@ -74,15 +74,19 @@ export default function LandingPage() {
             </nav>
 
             {/* Content */}
-            <div className="w-full h-100 flex flex-col justify-center items-center">
-                <div className="w-full h-72 opacity-50 bg-[url('/main.png')] bg-cover bg-no-repeat"></div>
-                <div className="w-4/5 h-32 bg-[#4E5FFF]"></div>
-            </div>
-            <div className="w-full h-40 mt-3 border-[#B1D5FF] border-t-2 border-b-2"></div>
-            <div className="w-7/8 h-40 flex justify-between items-center m-3">
-                <button className="w-1/4 h-20 border-[#4E5FFF] border-2 rounded-full"></button>
-                <button className="w-1/4 h-20 border-[#4E5FFF] border-2 rounded-full"></button>
-                <button className="w-1/4 h-20 border-[#4E5FFF] border-2 rounded-full"></button>
+            <div className="flex flex-col w-full justify-center">
+                <div className="flex flex-row gap-1 w-5/6 m-auto">
+                    <div className="flex-1 bg-[#b1d5ff] h-48 container rounded-lg mt-5 m-1"></div>
+                    <div className="flex-1 border-[#b1d5ff] border-2 h-48 container rounded-lg mt-5 m-1"></div>
+                </div>
+                <div className="flex w-5/6 m-auto">
+                    <div className="border-[#b1d5ff] border-2 h-48 container rounded-lg mt-5 m-1"></div>
+                </div>
+                <div className="flex flex-row gap-1 w-5/6 m-auto">
+                    <div className="flex-1 bg-[#b1d5ff] h-32 container rounded-lg mt-5 m-1"></div>
+                    <div className="flex-1 bg-[#b1d5ff] h-32 container rounded-lg mt-5 m-1"></div>
+                    <div className="flex-1 bg-[#b1d5ff] h-32 container rounded-lg mt-5 m-1"></div>
+                </div>
             </div>
         </div>
     );
