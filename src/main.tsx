@@ -16,6 +16,7 @@ import ChangePw from "./pages/ChangePw";
 import Policy from "./pages/Policy";
 import Layout from "./components/Layout";
 import BusBoardDetail from "./pages/BusBoardDetail";
+import SchoolMap from "./pages/School";
 
 const router = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
     {
         path: "/busboarddetail",
         element: <BusBoardDetail />,
+    },
+    {
+        path: "/ajoumap",
+        element: <SchoolMap />,
     },
 ]);
 

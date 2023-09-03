@@ -40,7 +40,7 @@ const BottomTab: React.FC = () => {
                     return classNames.join(" ");
                 }}
             >
-                <p className="text-primary font-semibold">route</p>
+                <p className="text-primary font-semibold">편의시설</p>
             </NavLink>
 
             <NavLink
