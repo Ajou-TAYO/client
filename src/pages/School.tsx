@@ -14,7 +14,7 @@ import { MdOutlineLocalConvenienceStore } from "react-icons/md";
 
 async function getData() {
     // Fetch data from an API or any other source
-    const response = await axios.get("http://127.0.0.1:8080/convenient", {});
+    const response = await axios.get("http://127.0.0.1:8080/campus", {});
     return response.data.data;
 }
 
@@ -27,7 +27,7 @@ const category = {
         title: "카페",
         icon: <BiCoffee />,
     },
-    RESTAURANT: {
+    CAFETERIA: {
         title: "식당",
         icon: <PiBowlFood />,
     },
@@ -39,7 +39,7 @@ const category = {
         title: "흡연구역",
         icon: <LuCigarette />,
     },
-    CONVENIENCESTORE: {
+    STORE: {
         title: "편의점",
         icon: <MdOutlineLocalConvenienceStore />,
     },
@@ -74,6 +74,8 @@ export default function SchoolMap() {
     const filteredPartnershipDatas = useMemo(() => {
         return facilityDatas.filter(facilityDatas => categoryFilterStatus[facilityDatas.category as TCategoryKey]);
     }, [facilityDatas, categoryFilterStatus]);
+
+    console.log(filteredPartnershipDatas);
 
     function onDismiss(markerindex: number) {
         const newBottomSheetStates = [...Open];

@@ -69,8 +69,6 @@ export default function AllianceMap() {
         );
     }, [partnershipDatas, categoryFilterStatus]);
 
-    console.log(filteredPartnershipDatas);
-
     function onDismiss(markerindex: number) {
         const newBottomSheetStates = [...Open];
         newBottomSheetStates[markerindex] = false;
