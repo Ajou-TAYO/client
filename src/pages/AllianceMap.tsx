@@ -1,6 +1,5 @@
 import { CustomOverlayMap, Map } from "react-kakao-maps-sdk";
-import { BottomSheet } from "react-spring-bottom-sheet";
-import "react-spring-bottom-sheet/dist/style.css";
+import BottomSheet from "../components/BottomSheet";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BottomNav from "../components/BottomNav";
@@ -99,13 +98,7 @@ export default function AllianceMap() {
                         />
                     </CustomOverlayMap>
                 ))}
-                <BottomSheet
-                    open={list}
-                    style={{ zIndex: 30 }}
-                    snapPoints={({ maxHeight }) => [maxHeight / 3, maxHeight * 0.7]}
-                    defaultSnap={({ maxHeight }) => maxHeight / 2}
-                    blocking={false}
-                >
+                <BottomSheet>
                     <div className="px-2 my-2 flex flex-row gap-2 justify-around">
                         {categoryKeys.map(categoryKey => (
                             <button
@@ -165,24 +158,6 @@ export default function AllianceMap() {
                     <div className="h-20" />
                 </BottomSheet>
             </Map>
-            {partnershipDatas.map(content => (
-                <BottomSheet
-                    key={content.id}
-                    open={Open[content.id]}
-                    onDismiss={() => onDismiss(content.id)}
-                    style={{ zIndex: 30 }}
-                    defaultSnap={({ maxHeight }) => maxHeight / 4}
-                    snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, maxHeight / 4, maxHeight * 0.6]}
-                >
-                    <p className="m-8 text-center text-3xl font-bold">{content.name}</p>
-                    <img
-                        src={`/img/alliance/${content.id}.jpg`}
-                        className="object-contain px-12 py-6"
-                        alt="해당 점포 이미지"
-                    />
-                    <p className="text-center text-2xl">{content.detail}</p>
-                </BottomSheet>
-            ))}
             <BottomNav />
         </div>
     );
