@@ -70,6 +70,8 @@ export default function AllianceMap() {
         );
     }, [partnershipDatas, categoryFilterStatus]);
 
+    console.log(filteredPartnershipDatas);
+
     function onDismiss(markerindex: number) {
         const newBottomSheetStates = [...Open];
         newBottomSheetStates[markerindex] = false;
@@ -136,7 +138,15 @@ export default function AllianceMap() {
                     <div id="partnershipContainer" className="flex flex-col gap-4 px-4">
                         {filteredPartnershipDatas.map(filteredPartnershipData => (
                             <div className="card bg-base-100 shadow-xl">
-                                <div className="card-body">
+                                <div
+                                    className="card-body"
+                                    onClick={() => {
+                                        setCenter({
+                                            lat: filteredPartnershipData.lat,
+                                            lng: filteredPartnershipData.lng,
+                                        });
+                                    }}
+                                >
                                     <h2 className="card-title">{filteredPartnershipData.name}</h2>
                                     <div>
                                         <span
