@@ -1,16 +1,16 @@
 import { CustomOverlayMap, Map } from "react-kakao-maps-sdk";
-import BottomSheet from "../components/BottomSheet";
+import BottomSheet from "../../components/BottomSheet";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import BottomNav from "../components/BottomNav";
+import BottomNav from "../../components/BottomNav";
 import "./land.css";
-import TopBar from "../components/TopBar";
+import TopBar from "../../components/TopBar";
 import { BiCoffee, BiDrink } from "react-icons/bi";
 import { PiBowlFood, PiGuitar } from "react-icons/pi";
 
 async function getData() {
     // Fetch data from an API or any other source
-    const response = await axios.get("http://127.0.0.1:8080/partnerships", {});
+    const response = await axios.get("http://121.137.66.90:8080/partnerships", {});
     return response.data.data;
 }
 

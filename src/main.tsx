@@ -3,20 +3,20 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import BusPage from "./pages/BusOverlay";
+import BusPage from "./pages/bus/BusOverlay";
 import LandingPage from "./pages/LandingPage";
-import LoginForm from "./pages/LoginForm";
-import PreSignUp from "./pages/PreSignUp";
-import SignUp from "./pages/SignUp";
-import FindPw from "./pages/FindPw";
-import AllianceMap from "./pages/AllianceMap";
-import Profile from "./pages/Profile";
-import ChangeNick from "./pages/ChangeNick";
-import ChangePw from "./pages/ChangePw";
-import Policy from "./pages/Policy";
+import LoginForm from "./pages/profile/LoginForm";
+import PreSignUp from "./pages/profile/PreSignUp";
+import SignUp from "./pages/profile/SignUp";
+import FindPw from "./pages/profile/FindPw";
+import AllianceMap from "./pages/partnership/AllianceMap";
+import Profile from "./pages/profile/Profile";
+import ChangeNick from "./pages/profile/ChangeNick";
+import ChangePw from "./pages/profile/ChangePw";
+import Policy from "./pages/profile/Policy";
 import Layout from "./components/Layout";
-import BusBoardDetail from "./pages/BusBoardDetail";
-import SchoolMap from "./pages/School";
+import BusBoardDetail from "./pages/bus/BusBoardDetail";
+import SchoolMap from "./pages/campus/School";
 
 const router = createBrowserRouter([
     {
@@ -85,7 +85,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <RouterProvider router={router} />
-            {/*<ReactQueryDevtools initialIsOpen={false} />*/}
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </QueryClientProvider>
     </React.StrictMode>,
 );

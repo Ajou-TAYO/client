@@ -3,18 +3,18 @@ import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import BottomNav from "../components/BottomNav";
-import "./land.css";
-import TopBar from "../components/TopBar";
+import "../land.css";
 import { BiCoffee, BiPrinter } from "react-icons/bi";
 import { PiBowlFood } from "react-icons/pi";
 import { GiVendingMachine } from "react-icons/gi";
 import { LuCigarette } from "react-icons/lu";
 import { MdOutlineLocalConvenienceStore } from "react-icons/md";
+import BottomNav from "../../components/BottomNav";
+import TopBar from "../../components/TopBar";
 
 async function getData() {
     // Fetch data from an API or any other source
-    const response = await axios.get("http://127.0.0.1:8080/campus", {});
+    const response = await axios.get("http://121.137.66.90:8080/campus", {});
     return response.data.data;
 }
 

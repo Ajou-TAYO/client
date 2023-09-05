@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import BottomTab from "../components/BottomNav";
-import TopBar from "../components/TopBar";
+import BottomTab from "../../components/BottomNav";
+import TopBar from "../../components/TopBar";
 
 //버스 상세 공지사항 페이지
 const BusBoardDetail = () => {
@@ -10,7 +10,7 @@ const BusBoardDetail = () => {
     useEffect(() => {
         const getBoard = async () => {
             try {
-                const response = await axios.get("http://127.0.0.1:8080/bus/notices", {});
+                const response = await axios.get("http://121.137.66.90:8080/bus/notices", {});
                 setBoards(response.data.data);
             } catch (error) {
                 console.error(error);
