@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import TopBar from "../components/TopBar";
+import TopBar from "../../components/TopBar";
 
 function ChangePw() {
     const navigate = useNavigate();

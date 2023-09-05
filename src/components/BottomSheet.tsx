@@ -24,7 +24,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ initialPosition = 25, childre
             const deltaY = startY - e.clientY;
             const newHeight = height + deltaY;
 
-            if (newHeight >= window.innerHeight * 0.25 && newHeight <= window.innerHeight * 0.5) {
+            if (newHeight >= window.innerHeight * 0.05 && newHeight <= window.innerHeight * 0.5) {
                 setHeight(newHeight);
                 setPosition((newHeight / window.innerHeight) * 100);
             }

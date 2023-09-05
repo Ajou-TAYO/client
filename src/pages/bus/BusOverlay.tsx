@@ -1,14 +1,14 @@
-import BottomSheet from "../components/BottomSheet";
+import BottomSheet from "../../components/BottomSheet";
 import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import axios from "axios";
 import BusMap from "./BusMap";
-import BottomNav from "../components/BottomNav";
+import BottomNav from "../../components/BottomNav";
 import BusPage2 from "./BusRental";
-import "./land.css";
+import "../land.css";
 import { useNavigate } from "react-router-dom";
-import BottomTab from "../components/BottomNav";
-import TopBar from "../components/TopBar";
+import BottomTab from "../../components/BottomNav";
+import TopBar from "../../components/TopBar";
 
 function currentTimer() {
     const date = new Date();

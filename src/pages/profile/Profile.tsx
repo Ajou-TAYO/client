@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Fragment, useState } from "react";
 import axios from "axios";
-import BottomNav from "../components/BottomNav";
-import TopBar from "../components/TopBar";
+import BottomNav from "../../components/BottomNav";
+import TopBar from "../../components/TopBar";
 
 function Profile() {
     const [value, setValue] = useState(0);

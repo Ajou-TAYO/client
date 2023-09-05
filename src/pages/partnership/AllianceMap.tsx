@@ -3,7 +3,7 @@ import BottomSheet from "../../components/BottomSheet";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BottomNav from "../../components/BottomNav";
-import "./land.css";
+import "../land.css";
 import TopBar from "../../components/TopBar";
 import { BiCoffee, BiDrink } from "react-icons/bi";
 import { PiBowlFood, PiGuitar } from "react-icons/pi";
